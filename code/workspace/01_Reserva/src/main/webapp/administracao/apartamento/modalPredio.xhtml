@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:sp="http://www.springframework.org/tags">
+	
+		<b:modal id="modalPredio" title="Bloco/Prédio"
+			styleClass="fade" close-on-escape="false" closable="true"
+			backdrop="false">
+			<h:form styleClass="form-horizontal row-border" id="formPredio">
+
+				<p:messages id="messagesPredio" globalOnly="false" autoUpdate="false" showDetail="false" closable="true"
+					showIcon="false" showSummary="true" />
+
+				<b:panelGrid colSpans="2,10" size="xs">
+					<h:outputLabel value="Nome:" styleClass="control-label" />
+					<b:inputText span="12" value="#{predioService.predio.nome}"
+						required="true" requiredMessage="Nome: Campo obrigatório!"
+						disabled="#{predioService.predio.idPredio > 0 ? 'true' : 'false'}"
+						readonly="#{predioService.predio.idPredio > 0 ? 'true' : 'false'}" />
+				</b:panelGrid>
+
+				<b:row style="text-align:right;margin:0 10px;">
+
+					<p:commandButton value="Enviar" icon="fa fa-thumbs-up"
+						action="#{predioService.saveOrUpdate}" update="messagesPredio"
+						styleClass="noui zoom btn btn-success" />
+				
+
+				</b:row>
+			</h:form>
+		</b:modal>
+
+</ui:composition>

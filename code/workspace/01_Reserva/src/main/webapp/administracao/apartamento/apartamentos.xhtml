@@ -1,0 +1,111 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:sp="http://www.springframework.org/tags"
+	template="/template/template.xhtml">
+
+	<ui:define name="title">        
+            APARTAMENTOS      
+    </ui:define>
+
+	<!-- <ui:define name="header" /> -->
+	<!-- <ui:define name="slide" /> -->
+	<!-- <ui:define name="search" /> -->
+	<!-- <ui:define name="modal" /> -->
+	<!-- <ui:define name="menuLeft" /> -->
+	<!-- <ui:define name="menuRight" /> -->
+
+	<ui:define name="main">
+
+		<ol class="breadcrumb">
+			<li ><a href="#{request.contextPath}/">Página inicial</a></li>
+			<li class="active"><a href="#{request.contextPath}/apartamentos">Apartamentos</a></li>
+			<li ><a href="#{request.contextPath}/proprietarios">Proprietários</a></li>
+		</ol>
+		<!-- //breadcrumb-->
+
+		<div id="content">
+		
+			<h3>Administrar apartamentos</h3>
+
+			<h:form id="formDataTable">
+			
+					<p:remoteCommand name="callAlterar" actionListener="#{apartamentoService.alterar}" process="@this" />
+					<p:remoteCommand name="callExcluir" actionListener="#{apartamentoService.excluir}" process="@this" />
+					<p:remoteCommand name="callStatus" actionListener="#{apartamentoService.status}" process="@this" />
+					<p:remoteCommand name="updateDataTable" actionListener="#{facesUtil.atualizaTable('formDataTable')}" process="@this" />
+
+					<p:commandButton icon="fa fa-share-square-o" value="Cadastrar"
+						action="#{apartamentoService.add}" process="@this"
+						styleClass="noui zoom btn btn-primary btn-lg" />
+					
+					<h:panelGroup id="dataTableBlock">
+					<table id="dataTable" class="table table-striped table-bordered table-hover" >
+				        <thead>
+				            <tr>
+				                <th class="col-check noprint">CHECK</th>
+				                <th class="col-codigo">CÓD</th>
+				                <th >BLOCO</th>
+				                <th >IDENTIFICADOR</th>
+				                <th >PROPRIETARIO</th>
+				                <th class="col-acoes noprint" >AÇÕES</th>
+				            </tr>
+				        </thead>
+				        <tfoot>
+				            <tr>
+				                <th >CHECK</th>
+				                <th >CÓD</th>
+				                <th >BLOCO</th>
+				                <th >IDENTIFICADOR</th>
+				                <th >PROPRIETARIO</th>
+				                <th >AÇÕES</th>
+				            </tr>
+				        </tfoot>
+			        </table>
+			        </h:panelGroup>
+			</h:form>
+
+		</div>
+
+		<ui:include src="modalApartamento.xhtml" />
+		
+	</ui:define>
+
+	<ui:define name="script">
+	
+		<script type="text/javascript">
+
+				var body=$("body");
+					body.toggleClass("in");
+
+				window.settingsTable = {
+					aoColumns: [
+						// visible:true, bSearchable:true, sClass:"left select-filter"
+			            { mDataProp: "check" },
+			            { mDataProp: "codigo" },
+			            { mDataProp: "predio",sClass:"select-filter" },
+			            { mDataProp: "identificador" },
+			            { mDataProp: "proprietario",sClass:"select-filter" },
+			            { mDataProp: "acao" },
+			        ],
+				}
+				window.settings = {};
+				settings = jsonConcat(settings, settingsTable);
+				settings = jsonConcat(settings, settingsTableDefault);
+			    jQuery(document).ready(function(){
+					window.table = $('#dataTable').DataTable(settings);
+				});
+	</script>
+	
+	</ui:define>
+
+</ui:composition>

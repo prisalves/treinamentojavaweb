@@ -1,0 +1,61 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:sp="http://www.springframework.org/tags">
+
+	<b:modal id="modalSaida" title="SAÍDA DO CAIXA DIA: #{caixaService.caixa}" size="modal-sm"
+		close-on-escape="false" closable="true" styleClass="fade modal-danger"
+		backdrop="false">
+		
+		<h:form styleClass="form-horizontal row-border" id="formSaida" onkeypress="if (event.keyCode == 13) { return false; }">
+
+			<p:messages id="messagesSaida" globalOnly="false" autoUpdate="false" showDetail="false" closable="true"
+				showIcon="false" showSummary="true" />
+				
+			<b:panelGrid colSpans="4,8" size="xs">
+				<h:outputLabel value="Apartamento" styleClass="control-label" />
+				<b:selectMultiMenu allSelectedText="Todos"
+					includeSelectAllOption="true" nonSelectedText="Selecione" numberDisplayed="1"
+					selectAllText="Selecionar todos" size="10" nSelectedText="selecionados" buttonWidth="130"
+					enableCaseInsensitiveFiltering="true" enableFiltering="true" radiobuttons="false"
+					filterPlaceholder="Procurar" value="#{movimentacaoService.apartamentos}">
+					<f:selectItems value="#{apartamentoService.findAll().toArray()}" var="select"
+						itemLabel="#{select}" itemValue="#{select.predio}-#{select.identificador}" />
+				</b:selectMultiMenu>
+			</b:panelGrid>
+			
+			<b:panelGrid colSpans="4,8" size="xs">
+				<h:outputLabel value="Valor: R$" styleClass="control-label" />
+				<p:inputText size="10" value="#{movimentacaoService.movimentacao.valor}"
+				required="true" requiredMessage="Valor: obrigatório"
+				onkeyup="moeda(this)" maxlength="10" >
+					<f:convertNumber pattern="#,##0.00" />
+				</p:inputText>
+			</b:panelGrid>
+			
+				<h:outputLabel value="Descrição" styleClass="control-label" />
+				<b:inputTextarea rows="3"
+				required="true" requiredMessage="Descrição: obrigatório"
+				value="#{movimentacaoService.movimentacao.descricao}" />
+			
+			<b:row style="text-align:right;margin:0 10px;">
+
+				<p:commandButton value="Salvar" icon="fa fa-thumbs-up"
+					action="#{movimentacaoService.saveOrUpdateSaida}" update="messagesSaida"
+					styleClass="noui zoom btn btn-success" />
+
+			</b:row>
+		</h:form>
+		
+	</b:modal>
+
+</ui:composition>

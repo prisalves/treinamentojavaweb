@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "java",
+        "name": "Debug (Attach)",
+        "request": "attach",
+        "hostName": "localhost",
+        "port": 18080,
+        "timeout": 10000,
+        "sourcePaths": [
+          "${workspaceRoot}"
+        ],
+        "preLaunchTask": "mvnDebug1"
+      }
+    ]
+  }

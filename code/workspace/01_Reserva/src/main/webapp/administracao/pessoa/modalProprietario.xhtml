@@ -1,0 +1,109 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:sp="http://www.springframework.org/tags">
+
+	<!-- MODAL -->
+	<b:modal id="modalProprietario" title="Proprietário" styleClass="fade"
+		close-on-escape="false" closable="true" backdrop="false">
+		<h:form styleClass="form-inline row-border" id="formProprietario">
+
+					<!-- MENSAGEM -->
+					<p:messages id="messagesProprietario" globalOnly="false" autoUpdate="false"
+						showDetail="false" closable="true" showIcon="false"
+						showSummary="true" />
+						
+					<!-- CONTA -->
+					<ui:remove>
+					<!-- 
+					<b:panelGrid colSpans="2,5,5" size="sm">
+						<h:outputLabel value="Conta:" styleClass="control-label" />
+						<p:selectOneMenu style="margin-top: 4px;width:100%;" appendTo="@(this)" filter="true" 
+						 converter="#{componentConverterConta}" filterMatchMode="contains" id="conta"
+						 required="true" requiredMessage="Conta: Campo obrigatório!"
+							value="#{pessoaService.pessoaFisica.conta}" >
+				            <f:selectItem itemLabel="Selecione" itemValue="" />
+				            <f:selectItems value="#{contaService.findAll().toArray()}" var="select" 
+									itemLabel="#{select}" itemValue="#{select}" />
+				        </p:selectOneMenu>
+						<p:commandButton icon="fa fa-share-square-o" value="ADD CONTA"
+							action="#{contaService.add}" process="@this" 
+							styleClass="noui zoom btn btn-primary btn-xs" />
+					</b:panelGrid>
+					<ui:include src="modalConta.xhtml" />
+					
+					<b:panelGrid colSpans="3,9" size="xs">
+						<h:outputLabel value="Nome:" styleClass="control-label" />
+						<b:inputText value="#{pessoaService.proprietario.nome}"
+							required="true" requiredMessage="Nome: Campo obrigatório!"
+							disabled="#{pessoaService.proprietario.idPessoa > 0 ? 'true' : 'false'}"
+							readonly="#{pessoaService.proprietario.idPessoa > 0 ? 'true' : 'false'}" />
+					</b:panelGrid>
+					
+					 -->
+					</ui:remove>
+					
+					<!-- BANCO -->
+					<b:panelGrid colSpans="3,9" size="sm">
+						<h:outputLabel value="Banco:" styleClass="control-label" />
+						<p:selectOneMenu style="margin-top: 4px;width:100%;" appendTo="@(this)" filter="true" 
+						 converter="#{componentConverterBanco}" filterMatchMode="contains" id="banco"
+							value="#{pessoaService.conta.banco}" >
+				            <f:selectItem itemLabel="Selecione" itemValue="" />
+				            <f:selectItems value="#{bancoService.findAll()}" var="select" 
+									itemLabel="#{select.nome}" itemValue="#{select}" />
+				        </p:selectOneMenu>
+					</b:panelGrid>
+						
+					<!-- AGENCIA -->
+					<b:panelGrid colSpans="3,9" size="xs">
+						<h:outputLabel value="Agência:" styleClass="control-label" />
+						<b:inputText size="10" value="#{pessoaService.conta.agencia}" />
+					</b:panelGrid>
+					
+					<!-- CONTA CORRENTE -->
+					<b:panelGrid colSpans="3,9" size="xs">
+						<h:outputLabel value="Conta corrente:" styleClass="control-label" />
+						<b:inputText value="#{pessoaService.conta.contaCorrente}" />
+					</b:panelGrid>
+						
+					<!-- NOME -->
+					<b:panelGrid colSpans="3,9" size="xs">
+						<h:outputLabel value="Nome:" styleClass="control-label" />
+						<b:inputText value="#{pessoaService.pessoaFisica.nome}"
+							required="true" requiredMessage="Nome: Campo obrigatório!" />
+					</b:panelGrid>
+					
+					<h3>Usuário</h3>
+					
+					<b:panelGrid colSpans="2,4,1,4,1" size="xs">
+						<h:outputLabel value="Login" styleClass="control-label" />
+						<p:inputText value="#{pessoaService.usuario.login}" />
+						<h:outputLabel value="Senha" styleClass="control-label" />
+						<b:inputSecret value="#{pessoaService.usuario.senha}" />
+					</b:panelGrid>
+					
+					<!-- SUBMIT -->
+					<b:row style="text-align:right;margin:0 10px;">
+						<p:commandButton value="Enviar" icon="fa fa-thumbs-up"
+							action="#{pessoaService.saveOrUpdate('Proprietario')}" update="messagesProprietario"
+							styleClass="noui zoom btn btn-success" />
+					</b:row>
+
+		</h:form>
+		<!-- FIM FORM -->
+	</b:modal>
+	<!-- FIM MODAL -->
+	
+	
+
+</ui:composition>

@@ -1,0 +1,17 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "run on server",
+        "type": "shell",
+        "command": "mvn tomcat7:run",
+        "group": "test"
+      },
+      {
+        "label": "mvnDebug1",
+        "type": "shell",
+        "command": "set MAVEN_OPTS='-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=18080';mvn tomcat7:run",
+        "group": "test"
+    }
+    ]
+  }

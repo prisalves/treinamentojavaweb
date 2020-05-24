@@ -1,0 +1,127 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:sp="http://www.springframework.org/tags">
+
+	<ui:remove>
+		<!--
+		/////////////////////////////////////////////////////////////////////////
+		//////////     HEADER  CONTENT     ///////////////
+		//////////////////////////////////////////////////////////////////////
+		-->
+		</ui:remove>
+		
+		<div id="header">
+		
+				<div class="logo-area clearfix">
+						<a href="#" class="logo"></a>
+				</div>
+				
+				<!-- //logo-area-->
+				<div class="tools-bar">
+						
+						<ul class="nav navbar-nav nav-main-xs">
+								<li><a href="#" class="icon-toolsbar nav-mini"><i class="fa fa-bars" /></a></li>
+						</ul>
+						
+						<ui:remove>
+						<!-- 
+						
+						<a href="#{request.contextPath}" class="logo_sistema hidden-xs hidden-sm fosco" ></a>
+						
+						<ul class="nav navbar-nav nav-top-xs hidden-xs tooltip-area menu-top">
+								<li class="h-seperate"></li>
+								<li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown"  data-hover="dropdown"><i class="fa fa-th-large"></i></a>
+										<ul class="dropdown-menu arrow animated fadeInUp fast">
+												<li><a href="#"> Profile</a></li>
+												<li><a href="#"> Setting </a></li>
+												<li><a href="#"> Bookmarks</a></li>
+												<li><a href="#"> Make a Deposit</a></li>
+												<li><a href="#{request.contextPath}/permissao"> Permissões</a></li>
+												<li><a href="#{request.contextPath}/perfil"> Perfil</a></li>
+												<li><a href="#{request.contextPath}/usuario"> Usuário</a></li>
+												<li class="divider"></li>
+												<li class="dropdown-submenu"> <a tabindex="-1" href="#">multi level options <i class="fa fa-angle-right"></i></a>
+														<ul class="dropdown-menu  animated fadeInRight fast">
+																<li><a tabindex="-1" href="#">Second level</a></li>
+																<li><a href="#">Second level</a></li>
+																<li><a href="#">Second level</a></li>
+														</ul>
+												</li>
+										</ul>
+								</li>
+								<li class="h-seperate"></li>
+								<li><a href="#" data-toggle="tooltip" title="View front end" data-container="body"  data-placement="bottom"><i class="fa fa-laptop"></i></a></li>
+								<li class="h-seperate"></li>
+						</ul> 
+						
+						-->
+						</ui:remove>
+						
+						
+						
+						<ul class="nav navbar-nav navbar-right tooltip-area">
+								<ui:remove>
+								<!-- li><a href="#menu-right" ><i class="fa fa-align-right"></i></a></li> -->
+								<!-- <li class="hidden-xs hidden-sm"><a href="#" class="h-seperate">SUPORTE</a></li> -->
+								<!-- <li><button class="btn btn-circle btn-header-search" ><i class="fa fa-search"></i></button></li> -->
+								<!-- <li><a href="#" data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle nav-collapse avatar-header">
+												<img alt="" src="#{resource['template/img/avatar.png']}"  class="circle" />
+												<span class="badge">3</span>
+									</a>
+									<div class="dropdown-menu pull-right icon-right arrow">
+											MENSAGENS
+									</div>
+									//dropdown-menu
+								</li> 
+								-->
+								</ui:remove>
+								<li class="dropdown">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">
+											<em><strong><h:outputText value="#{usuarioSistemaService.usernameSistema}" /></strong></em> <i class="dropdown-icon fa fa-angle-down"></i>
+										</a>
+										<ul class="dropdown-menu pull-right icon-right arrow">
+												<ui:remove>
+												<!-- 
+												<li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+												<li class="dropdown-submenu"><a href="#" ><i class="fa fa-cog"></i> Setting </a>
+														<ul class="dropdown-submenu animated fadeInLeft fast">
+																<li><a tabindex="-1" href="#">Second level</a></li>
+																<li><a href="#">Second level</a></li>
+																<li><a href="#">Second level</a></li>
+														</ul>
+												</li>
+												<li><a href="#"><i class="fa fa-bookmark"></i> Bookmarks</a></li>
+												<li><a href="#"><i class="fa fa-money"></i> Make a Deposit</a></li>
+												<li class="divider"></li> 
+												-->
+												</ui:remove>
+												<li><a href="#{request.contextPath}/logout"><i class="fa fa-sign-out"></i> Sair do sistema </a></li>
+										</ul>
+										<!-- //dropdown-menu-->
+								</li>
+								<li class="visible-md">
+									<a href="#" class="h-seperate fullscreen" data-toggle="tooltip" title="Full Screen" data-container="body"  data-placement="left">
+										<i class="fa fa-expand"></i>
+									</a>
+								</li>
+						</ul>
+				</div>
+				<!-- //tools-bar-->
+				
+		</div>
+		<!-- //header-->
+
+
+</ui:composition>

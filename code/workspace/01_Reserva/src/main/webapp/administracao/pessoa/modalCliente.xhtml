@@ -1,0 +1,160 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:sp="http://www.springframework.org/tags">
+
+	<!-- MODAL -->
+	<b:modal id="modalCliente" title="Cliente" styleClass="fade" 
+		close-on-escape="false" closable="true" backdrop="false">
+		<h:form styleClass="form-inline row-border" id="formCliente">
+
+					<!-- MENSAGEM -->
+					<p:messages id="messagesCliente" globalOnly="false" autoUpdate="false"
+						showDetail="false" closable="true" showIcon="false"
+						showSummary="true" />
+						
+					<h3>Informações do cliente</h3>
+					
+					<!-- NOME /CPF -->
+					<b:panelGrid colSpans="2,5,1,4" size="sm">
+						<h:outputLabel value="Nome:" styleClass="control-label" />
+						<b:inputText maxlength="200" value="#{pessoaService.pessoaFisica.nome}"
+							required="true" requiredMessage="Nome: Campo obrigatório!" />
+						<h:outputLabel value="CPF:" styleClass="control-label" />
+						<b:inputText maxlength="15" value="#{pessoaService.pessoaFisica.cpf}"
+							required="true" requiredMessage="CPF: Campo obrigatório!" />
+					</b:panelGrid>
+					
+					<!-- RG / ORGAO EXPEDIDOR -->
+					<b:panelGrid colSpans="2,5,1,3,1" size="sm">
+						<h:outputLabel value="RG:" styleClass="control-label" />
+						<b:inputText maxlength="15" value="#{pessoaService.pessoaFisica.rg}" />
+						<h:outputLabel value="Orgão" styleClass="control-label" />
+						<b:inputText maxlength="20" value="#{pessoaService.pessoaFisica.orgaoExpedidor}"/>
+					</b:panelGrid>
+					
+					<h3>Contato</h3>
+					
+					<!-- TELEFONES -->
+					<b:panelGrid colSpans="2,4,2,4" size="sm">
+						<h:outputLabel value="Telefone 1:" styleClass="control-label" />
+						<b:inputText maxlength="30" value="#{pessoaService.pessoaFisica.telefone1}" />
+						<h:outputLabel value="Telefone 2:" styleClass="control-label" />
+						<b:inputText maxlength="30" value="#{pessoaService.pessoaFisica.telefone2}" />
+					</b:panelGrid>
+					
+					<!-- EMAIL -->
+					<b:panelGrid colSpans="2,4,1,5" size="sm">
+						<h:outputLabel value="Telefone 3:" styleClass="control-label" />
+						<b:inputText maxlength="30" value="#{pessoaService.pessoaFisica.telefone3}" />
+						<h:outputLabel value="Email:" styleClass="control-label" />
+						<b:inputText size="40" maxlength="10" value="#{pessoaService.pessoaFisica.email}" />
+					</b:panelGrid>
+					
+					<h3>Endereço</h3>
+					
+					<!-- CEP -->
+					<b:panelGrid colSpans="2,10" size="sm">
+						<h:outputLabel value="CEP:" styleClass="control-label" />
+						<b:inputText size="10" maxlength="10" value="#{pessoaService.pessoaFisica.cep}" />
+					</b:panelGrid>
+					
+					<!-- LAGRODOURO -->
+					<b:panelGrid colSpans="2,5,1,4" size="sm">
+						<h:outputLabel value="Lagrodouro:" styleClass="control-label" />
+						<b:inputText maxlength="200" value="#{pessoaService.pessoaFisica.lagrodouro}" />
+						<h:outputLabel value="Nº:" styleClass="control-label" />
+						<b:inputText maxlength="20" value="#{pessoaService.pessoaFisica.numero}" />
+					</b:panelGrid>
+					
+					<!-- COMPLEMENTO -->
+					<b:panelGrid colSpans="2,10" size="sm">
+						<h:outputLabel value="Complemento:" styleClass="control-label" />
+						<b:inputText maxlength="30" value="#{pessoaService.pessoaFisica.complemento}" />
+					</b:panelGrid>
+					
+					<b:panelGrid colSpans="2,10" size="sm">
+						<p:outputLabel value="Estado: " />
+						<p:selectOneMenu id="estado" styleClass="selectEstado"
+							panelStyleClass="selectEstadoPanel" style="width:170px"
+							appendTo="@(this)" filter="true" filterMatchMode="contains" immediate="true"
+							value="#{pessoaService.pessoaFisica.cidade.estado}"
+							valueChangeListener="#{pessoaService.changeEstado}"
+							converter="#{componentConverterEstado}">
+							<p:ajax process="estado" event="change" update="cidade" />
+							<f:selectItems var="e" value="#{pessoaService.listaEstados}" itemValue="#{e}" itemLabel="#{e.nome}" />
+						</p:selectOneMenu>
+					</b:panelGrid>
+					
+					<b:panelGrid colSpans="2,10" size="sm">
+						<p:outputLabel value="Cidade: " />
+						<p:selectOneMenu id="cidade" value="#{pessoaService.pessoaFisica.cidade}"
+							appendTo="@(this)" filter="true" filterMatchMode="contains"
+							style="width:170px" converter="#{componentConverterCidade}">
+							<f:selectItems var="c" value="#{pessoaService.listaCidades}" itemValue="#{c}" itemLabel="#{c.nome}" />
+						</p:selectOneMenu>
+					</b:panelGrid>
+		
+					<b:panelGrid colSpans="3,9" size="sm">
+						<h:outputLabel value="Tipo de endereço: "  />
+						<p:selectOneMenu id="tipoEndereco" style="width:150px;"
+							appendTo="@(this)" filter="true" filterMatchMode="contains"
+							value="#{pessoaService.pessoaFisica.tipoEndereco}">
+							<f:selectItem itemLabel="Selecione o tipo" itemValue="" noSelectionOption="true" />
+							<f:selectItem itemLabel="Residencial" itemValue="Residencial" />
+							<f:selectItem itemLabel="Comercial" itemValue="Comercial" />
+							<f:selectItem itemLabel="Outro" itemValue="Outro" />
+						</p:selectOneMenu>
+					</b:panelGrid>
+					
+					<h3>Carro</h3>
+					
+					<!-- CARRO DESC -->
+					<b:panelGrid colSpans="2,10" size="sm">
+						<h:outputLabel value="Descrição:" styleClass="control-label" />
+						<b:inputText size="80" maxlength="100" value="#{pessoaService.pessoaFisica.carroDescricao}" />
+					</b:panelGrid>
+					
+					<!-- CARRO PLACA -->
+					<b:panelGrid colSpans="2,10" size="sm">
+						<h:outputLabel value="Placa:" styleClass="control-label" />
+						<b:inputText maxlength="10" value="#{pessoaService.pessoaFisica.carroPlaca}" />
+					</b:panelGrid>
+					
+					<ui:remove>
+					<!-- 
+					<h3>Usuário</h3>
+					<b:panelGrid colSpans="2,4,1,4,1" size="xs">
+						<h:outputLabel value="Login" styleClass="control-label" />
+						<p:inputText value="#{pessoaService.usuario.login}" />
+						<h:outputLabel value="Senha" styleClass="control-label" />
+						<b:inputSecret value="#{pessoaService.usuario.senha}" />
+					</b:panelGrid>
+					 -->
+					</ui:remove>
+					
+					
+					<!-- SUBMIT -->
+					<b:row style="text-align:right;margin:0 10px;">
+						<p:commandButton value="Enviar" icon="fa fa-thumbs-up"
+							action="#{pessoaService.saveOrUpdate('Cliente')}" update="messagesCliente"
+							styleClass="noui zoom btn btn-success" />
+					</b:row>
+
+		</h:form>
+		<!-- FIM FORM -->
+	</b:modal>
+	<!-- FIM MODAL -->
+	
+	
+
+</ui:composition>

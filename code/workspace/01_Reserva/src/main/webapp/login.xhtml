@@ -1,0 +1,226 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:sp="http://www.springframework.org/tags"
+	template="/template/template.xhtml">
+
+	<ui:define name="title">        
+            Área do Usuário   
+    </ui:define>
+
+	<ui:define name="header" />
+	<ui:define name="slide" />
+	<ui:define name="search" />
+	<ui:define name="modal" />
+	<ui:define name="menuLeft" />
+	<ui:define name="menuRight" />
+	<ui:define name="mainPrincipal" />
+
+	<ui:define name="login">
+
+		<h:outputStylesheet library="template" name="css/login.css" />
+
+		<h:outputScript rendered="${msg!=null}">
+		 jQuery(window).load(function(e) {
+		 	notice('Erro!','${msg}','vermelho',8000,'bling1');
+		 });
+		</h:outputScript>
+
+
+		<form id="formLogin" class="form-signin" name="formLogin"
+			style="display: none;"
+			action="#{request.contextPath}/login" method="post">
+
+			<ui:remove>
+				<!-- 
+			
+			<div id="alert"></div>
+			<b:alert severity="danger" rendered="${msg!=null}" closable="true"
+				 id="loginAlert" title="Error!">${msg}</b:alert>
+				 
+			<b:selectBooleanCheckbox id="_spring_security_remember_me"
+					name="_spring_security_remember_me" value="true" caption="Lembrar" /> 
+				 
+			-->
+			</ui:remove>
+
+			<h:panelGroup id="username" layout="block" styleClass="input-group">
+				<span class="input-group-addon primary"> <b:iconAwesome
+						name="user" />
+				</span>
+				<h:inputText value="" id="j_username" pt:name="j_username"
+					pt:data-required="true" pt:required="required"
+					pt:placeholder="Usuário"
+					pt:data-validetta="required,minLength[3],maxLength[20]"
+					styleClass="form-control" />
+			</h:panelGroup>
+
+			<h:panelGroup id="password" layout="block" styleClass="input-group">
+				<span class="input-group-addon primary"> <b:iconAwesome
+						name="key" />
+				</span>
+				<h:inputSecret value="" id="j_password" pt:name="j_password"
+					pt:data-required="true" pt:required="required"
+					pt:placeholder="Senha"
+					pt:data-validetta="required,minLength[3],maxLength[20]"
+					styleClass="form-control" />
+			</h:panelGroup>
+
+
+			<h:panelGroup id="security" layout="block" style="padding:10px 0;">
+					<ul class="widget-slide-setting" style="color: #000 !important;">
+						<li>
+							<div class="ios-switch primary pull-right">
+								<div class="switch">
+									<input type="checkbox" name="remember-me"
+										data-toggle="tooltip" title="View front end"
+										data-container="body" data-placement="bottom" />
+								</div>
+							</div> 
+							<div style="text-align: right;padding: 5px 60px 0px 0px;">Lembrar usuário</div>
+						</li>
+					</ul>
+			</h:panelGroup>
+
+			<h:panelGroup id="submit" layout="block" style="text-align:center;">
+				<button type="submit" class="btn btn-primary zoom btn-lg">
+					<b:iconAwesome name="sign-in" />
+					Login
+				</button>
+			</h:panelGroup>
+
+		</form>
+
+		<script type="text/javascript">
+
+		//READ
+		jQuery(window).ready(function() {
+
+			$('#formLogin').validetta({
+				realTime : true,
+				bubblePosition: 'bottom',
+		    	regExp: {
+		    		numero : {
+	                    pattern : /^(?=.*\d).*$/,
+	                    errorMessage : 'Preencha com número!'
+	                },
+            		login : {
+	                    pattern : /^[a-zA-Z][a-zA-Z0-9-_\.]{2,20}$/,
+	                    errorMessage : 'De 3 a 20 caracter!'
+	                },
+					senha : {
+		                pattern : /(?=^.{3,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
+		                errorMessage : 'minimo 3 caracter com !'
+		            },
+	            },
+	            onValid : function( event ) {
+		            //event.preventDefault();
+		            //$('#alert').html('OK');
+		            /* $.ajax({
+		                url : '#{request.contextPath}/j_spring_security_check?ajax=true',
+		                data : $(this.form).serialize(),
+		                //dataType : 'json',
+		                beforeSend : function(){
+		                    console.log('Started request !');
+		                }
+		            })
+		            .done( function(data,textStatus,xhr){
+		            	console.log(xhr.status);
+		            	console.log(textStatus);
+		            	console.log(this.status);
+		            	window["dataForm"] = data;
+		                alert("ok");
+		            })
+		            .fail( function( jqXHR, textStatus ){
+		                console.log(textStatus+':'+jqXHR.status+' : '+jqXHR.statusText);
+		            })
+		            .always( function( result ){ console.log('Request done !!') }); */
+		        },
+		        onError : function( event ){
+		        	//event.preventDefault();
+		        	//$('#alert').html('ERROR');
+		        }
+		    }); 
+		     
+		});
+		
+		//LOAD
+		jQuery(window).load(function() {
+
+			load.close();
+
+			$('#formLogin').css('display','block');
+						
+			if( isMobileDevice() ){
+				$('#username').actuate('fadeInUp',null,0);
+				$('#password').actuate('fadeInUp',null,2);
+				$('#security').actuate('fadeInUp',null,3);
+				$('#submit').actuate('fadeInUp',tada,3);
+			}else{
+				$('#username').actuate('fadeInUp',null,0);
+				$('#password').actuate('fadeInUp',null,0.5);
+				$('#security').actuate('fadeInUp',null,1);
+				$('#submit').actuate('fadeInUp',tada,1.5);
+			}
+			
+			//$('#loginAlert').actuate('bounceIn',tada(5),0);
+			$('.jBox-Notice').actuate('tada',null,2);
+
+			function tada(x){
+				x.actuate('tada',function(y){ /* y.remove(); */ },3);
+			}
+
+
+			function toCenter(){
+				
+				//var janelaH = $("#wrapper").outerHeight();
+				var janelaH = jQuery(window).height();
+				//var formLoginH = jQuery("#formLogin").outerHeight();
+				var formLoginH = 230;
+				var marginT = (janelaH-formLoginH)/2;
+
+				if(marginT > 30){
+					jQuery("#formLogin").css("top",marginT+10);
+				}else{
+					jQuery("#formLogin").css("top",30);
+				}
+
+				//var formLoginW = jQuery("#formLogin").outerWidth();
+				var formLoginW = 330;
+				var janelaW = jQuery(window).width();
+				var marginL = (janelaW-formLoginW)/2;
+				jQuery("#formLogin").css("left",marginL+5);
+				
+			}
+			toCenter();
+			var toResize;
+			jQuery(window).resize(function(e) {
+				clearTimeout(toResize);
+				toResize = setTimeout(toCenter(), 500);
+			});
+			
+		});
+		</script>
+
+	</ui:define>
+
+	<ui:define name="script">
+		<script type="text/javascript">
+			var body=$("body");
+				//body.removeClass("leftMenu");
+				//body.removeClass("nav-collapse");
+				//body.removeClass("in");
+				body.addClass("full-lg");
+	</script>
+	</ui:define>
+
+</ui:composition>

@@ -1,0 +1,23 @@
+
+@import url("#{resource['template/fonts/bitter.css']}");
+@import url("#{resource['template/fonts/roboto.css']}");
+@import url("#{resource['template/fonts/open-sans.css']}");
+@import url("#{resource['template/fonts/ubuntu.css']}");
+
+@import url("#{resource['plugins/form/icheck/skins/all.css']}");
+@import url("#{resource['plugins/form/switch/switch.css']}");
+@import url("#{resource['plugins/datetime/datetime.css']}");
+@import url("#{resource['template/css/animation.css']}");
+/* @import url("#{resource['template/css/jquery-ui.css']}"); */
+
+@import url("#{resource['plugins/bootstrap/css/bootstrap.css']}");
+@import url("#{resource['plugins/bootstrap/css/bootstrap-theme.css']}");
+
+@import url("#{resource['plugins/animate/animate.min.css']}");
+
+@import url("#{resource['template/css/bootstrap.css']}");
+
+@import url("#{resource['template/css/bootstrap-themes.css']}");
+@import url("#{resource['template/css/theme.css']}");
+@import url("#{resource['template/css/styleTheme1.css']}");
+@import url("#{resource['template/css/theme_add.css']}");

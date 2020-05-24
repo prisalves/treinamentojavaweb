@@ -1,0 +1,174 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:sp="http://www.springframework.org/tags">
+
+	<ui:remove>
+		<!--
+		/////////////////////////////////////////////////////////////////////////
+		//////////     LOADING     ///////////////
+		//////////////////////////////////////////////////////////////////////
+		-->
+	</ui:remove>
+	
+	<style type="text/css">
+	/*
+	#wrapper { opacity: 0; }
+	*/
+	.loader-overlay {
+	  -moz-opacity: 1;
+	  -moz-perspective: 10000;
+	  -moz-perspective: 10000px;
+	  -webkit-opacity: 1;
+	  -webkit-perspective: 10000;
+	  -webkit-perspective: 10000px;
+	  /* background: rgba(0,0,0,1.0) none repeat scroll 0% 0%; */
+	  background: #000 url('#{resource['template/img/loading3.jpg']}') no-repeat center center;
+	  background-size: cover;
+	  /* background-size: contain; */
+	  
+	  filter: alpha(opacity=100);
+	  left: 0;
+	  top: 0;
+	  opacity: 1;
+	  overflow: hidden;
+	  perspective: 10000;
+	  perspective: 10000px;
+	  position: absolute !important;
+	  width: 100% !important;
+	  height:100% !important;
+	  display:block;
+	  cursor:pointer;
+	  
+	  transition: background 500ms ease-in-out, opacity 500ms ease-in-out, visibility 500ms ease-in-out !important;
+	  -webkit-transition: background 500ms ease-in-out, opacity 500ms ease-in-out, visibility 500ms ease-in-out !important;
+	  -moz-transition: background 500ms ease-in-out, opacity 500ms ease-in-out, visibility 500ms ease-in-out !important;
+	  -o-transition: background 500ms ease-in-out, opacity 500ms ease-in-out, visibility 500ms ease-in-out !important;
+	  
+	  z-index: 10000 !important;
+	  zoom: 1 !important;
+	}
+	.loader-overlay .loader-inner {
+	  	left: 50%;
+		margin-left: -60px;
+		margin-top: 10px;
+		position: absolute;
+		top: 50%;
+		color: #FFF;
+		font-weight: bold;
+		font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+		font-size: 12px;
+	}
+	.loader-overlay.loaded {
+	  -ms-opacity: 0;
+	  -o-opacity: 0;
+	  -moz-opacity: 0;
+	  -webkit-opacity: 0;
+	  filter: alpha(opacity=0);
+	  opacity: 0;
+	  visibility: hidden;
+	  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+	  zoom: 1;
+	  background: none;
+	  display:none;
+	}
+	.spinner {
+	  -moz-user-select: none;
+	  -ms-user-select: none;
+	  -o-user-select: none;
+	  -webkit-user-select: none;
+	  bottom: 0;
+	  height: 2em;
+	  left: 0;
+	  margin: auto;
+	  position: absolute;
+	  right: 0;
+	  text-align: center;
+	  top: 0;
+	  user-select: none;
+	  width: 5em;
+	}
+	.spinner .bounce1 {
+	  -webkit-animation-delay: -0.32s;
+	  animation-delay: -0.32s;
+	  margin-right: .5em;
+	}
+	.spinner .bounce2 {
+	  -webkit-animation-delay: -0.16s;
+	  animation-delay: -0.16s;
+	  margin-right: .5em;
+	}
+	.spinner > div {
+	  -moz-border-radius: 100%;
+	  -webkit-animation-fill-mode: both;
+	  -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+	  -webkit-border-radius: 100%;
+	  animation-fill-mode: both;
+	  animation: bouncedelay 1.4s infinite ease-in-out;
+	  background-color: #ffffff;
+	  border-radius: 100%;
+	  display: inline-block;
+	  height: 1em;
+	  width: 1em;
+	}
+	
+	@-moz-keyframes bouncedelay {
+	  	0%,80%,100% { -moz-transform: scale(0); }
+	  	40% { -moz-transform: scale(1); }
+	}
+	@-ms-keyframes bouncedelay {
+	  	0%,80%,100% { -ms-transform: scale(0); }
+	  	40% { -ms-transform: scale(1); }
+	}
+	@-o-keyframes bouncedelay {
+	  	0%,80%,100% { -o-transform: scale(0); }
+	  	40% { -o-transform: scale(1); }
+	}
+	@-webkit-keyframes bouncedelay {
+	  	0%,80%,100% { -webkit-transform: scale(0); }
+	  	40% { -webkit-transform: scale(1); }
+	}
+	@keyframes bouncedelay {
+		0%,80%,100% { -webkit-transform: scale(0); transform: scale(0); }
+	  	40% { -webkit-transform: scale(1); transform: scale(1); }
+	}
+	</style>
+	
+	<!-- BEGIN PRELOADER -->
+	<div class="loader-overlay">
+		<div class="loader-inner">Aguarde carregando ...</div>
+		<div class="spinner">
+			<div class="bounce1"></div>
+			<div class="bounce2"></div>
+			<div class="bounce3"></div>
+		</div>
+	</div>
+	<!-- END PRELOADER -->
+	
+	<script type="text/javascript">
+	jQuery(window).load(function() { // LOAD CSS,IMGs
+		/*
+		var bloco = $('#menu,#nav,.logo-menu,#main,#menu-right');
+		bloco.show(10).animate({
+	        opacity: 1
+	    }, 200);
+	    */
+		//$('.loader-overlay').addClass('loaded');
+	    $('.loader-overlay').hide(1000);
+	    setTimeout(function(){ 
+	    	$('.loader-overlay').remove();
+		},1000);
+	});
+	</script>
+	
+
+</ui:composition>

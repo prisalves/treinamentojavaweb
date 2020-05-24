@@ -1,0 +1,102 @@
+body{
+	background: #FFF;
+}
+.jumbotron {
+	/*margin:20px 10px;
+	position: relative;*/
+	padding-top: 0px;
+	margin-top:10px;
+}
+h3 {
+	margin-bottom: 30px;
+}
+.table {
+	margin-top: 20px;
+}
+.form-control {
+	margin-bottom: 5px;
+}
+.selecionado {
+	background-color: yellow;
+}
+.negrito {
+	font-weight: bold;
+}
+hr {
+	border-color: #999;
+}
+
+.ribbon {
+	position: absolute;
+	top: 0px;
+	right: 30px;
+	width: 20px;
+	height: 40px;
+	border-style: solid;
+	border-width: 0 10px 10px 10px;
+	border-color: transparent transparent #EEE transparent;
+	cursor: pointer;
+	background-color: #EE0000;
+}
+.ribbon:hover {
+	height: 41px;
+}
+
+.form-horizontal .control-label {
+    padding-top: 7px;
+    margin-bottom: 0;
+    text-align: right;
+}
+
+ @media only screen and (max-width : 768px) {
+	.form-horizontal .control-label {
+	    text-align: left;
+	    margin-bottom: 10px !important;
+	}
+}
+
+.obs{
+	font-size: 12px;
+	color: #ba2c2f;
+}
+.obrigatorio{
+	color: #ba2c2f;
+}
+    
+.loading{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: inline-block;
+	background-color: RGBA(0, 0, 0, 0.41);
+	z-index: 99999;
+	cursor: inherit;
+	text-align: center;
+	padding-top: 10%;
+	font-size: 30px;
+	color: #FFF;
+	margin: 0;
+	margin: -15px 0 0 -15px;
+}
+.jumbotron p {
+    margin-bottom: 5px;
+ }
+ 
+ .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+ 
+ .alerta {
+ 	max-width: 400px;
+    margin: 10px auto;
+    text-align: center;
+}
+
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+    vertical-align: middle !important;
+}
+table.dataTable tbody th, table.dataTable tbody td {
+    padding: 4px 10px !important;
+}
+
+.lista_usuarios{
+	margin-top:60px;
+}

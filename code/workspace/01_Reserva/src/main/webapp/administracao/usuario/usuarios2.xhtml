@@ -1,0 +1,111 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:sp="http://www.springframework.org/tags"
+	template="/template/template.xhtml">
+
+	<ui:define name="title">        
+            USUÁRIOS      
+    </ui:define>
+
+	<!-- <ui:define name="header" /> -->
+	<!-- <ui:define name="slide" /> -->
+	<!-- <ui:define name="search" /> -->
+	<!-- <ui:define name="modal" /> -->
+	<!-- <ui:define name="menuLeft" /> -->
+	<!-- <ui:define name="menuRight" /> -->
+
+	<ui:define name="main">
+
+		<ol class="breadcrumb">
+			<li class="active"><a href="#{request.contextPath}/usuarios">Usuários</a></li>
+			<li><a href="#{request.contextPath}/perfis">Perfis</a></li>
+			<li><a href="#{request.contextPath}/permissoes">Permissões</a></li>
+		</ol>
+		<!-- //breadcrumb-->
+
+		<div id="content">
+
+			<h3>Administrar usuários</h3>
+
+			<h:form id="formDataTable">
+
+				<p:commandButton icon="fa fa-share-square-o" value="Cadastrar"
+					action="#{usuarioService.add}" process="@this"
+					styleClass="noui zoom btn btn-primary btn-lg" />
+
+				<p:dataTable id="dataTable" var="item" filteredValue="#{usuarioService.filteredUsuarios}"
+					value="#{usuarioService.findAll()}" stickyHeader="false" 
+					tableStyleClass="table table-striped table-bordered table-hover"
+					paginator="true" widgetVar="tableWidget" paginatorPosition="top"
+					emptyMessage="Nenhum registro encontrado!" sortMode="multiple"
+					paginatorTemplate="{CurrentPageReport} {RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+					rowsPerPageTemplate="20,50,100,500"
+					currentPageReportTemplate="Mostrando de {startRecord} até {endRecord} de {totalRecords} registros">
+					
+					<f:facet name="header">
+			            <p:outputPanel>
+			                <h:outputText value="Busca:" />
+			                <p:inputText id="globalFilter" onkeyup="PF('tableWidget').filter();$('.switch')['bootstrapSwitch']();" style="width:150px" placeholder="Enter keyword"/>
+			            </p:outputPanel>
+			        </f:facet>
+
+					<p:column headerText="ID" sortBy="#{item.idUsuario}" filterBy="#{item.idUsuario}" filterMatchMode="contains" style="text-align:left;">
+						<h:outputText value="#{item.idUsuario}" />
+					</p:column>
+					
+					<p:column headerText="LOGIN" filterBy="#{item.login}" filterMatchMode="contains" sortBy="#{item.login}" style="text-align:center;">
+						<h:outputText value="#{item.login}" />
+					</p:column>
+
+					<p:column headerText="Status" width="55" style="text-align:center;">
+							<div class="ios-switch primary item-status">
+								<div class="switch" id="status-#{item.idUsuario}">
+									<h:selectBooleanCheckbox value="#{item.status}" styleClass="#{item.status}" >
+										<p:ajax event="change"  
+											listener="#{usuarioService.modificaStatus(item)}" update="@this" process="@this" />
+									</h:selectBooleanCheckbox>
+								</div>
+							</div>
+					</p:column>
+
+
+					<p:column headerText="Ações" width="73"
+						rendered="#{item.login!='adm'}" style="text-align:center;">
+						<p:commandButton icon="ui-icon-pencil" style="margin-right:5px;"
+							action="#{usuarioService.alterar(item)}" styleClass="btn-warning" />
+						<p:commandButton icon="ui-icon-trash" styleClass="btn-danger"
+							action="#{usuarioService.delete(item)}">
+							<p:confirm header="Confirmação"
+								message="Deseja excluir este registro?" icon="ui-icon-alert" />
+						</p:commandButton>
+					</p:column>
+
+				</p:dataTable>
+			</h:form>
+
+		</div>
+
+		<ui:include src="modalUsuario.xhtml" />
+		<ui:include src="modalPerfil.xhtml" />
+		<ui:include src="modalPermissao.xhtml" />
+
+	</ui:define>
+
+	<ui:define name="script">
+		<script type="text/javascript">
+			var body=$("body");
+				body.toggleClass("in");
+	</script>
+	</ui:define>
+
+</ui:composition>

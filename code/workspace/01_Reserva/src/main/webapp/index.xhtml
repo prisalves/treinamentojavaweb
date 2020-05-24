@@ -1,0 +1,119 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:sp="http://www.springframework.org/tags"
+	template="/template/template.xhtml">
+
+	<ui:define name="title">        
+            INDEX - SISFENICIA        
+    </ui:define>
+
+	<!-- <ui:define name="header" /> -->
+	<!-- <ui:define name="slide" /> -->
+	<!-- <ui:define name="search" /> -->
+	<ui:define name="modal" />
+	<!-- <ui:define name="menuLeft" /> -->
+	<!-- <ui:define name="menuRight" /> -->
+
+	<ui:define name="main">
+
+		<ol class="breadcrumb">
+			<li class="active"><a href="#{request.contextPath}/">Página inicial</a></li>
+		</ol>
+		<!-- //breadcrumb-->
+
+		<div id="content">
+
+			<h:form style="text-align:center;">
+			
+				<h:panelGroup rendered="#{facesUtil.hasRole('ADMIN')}">
+					<a href="#{request.contextPath}/usuarios" class="zoom btn btn-info btn-lg btn-icon">
+						<i class="fa fa-users fa-4x"></i><br />USUÁRIOS
+					</a>
+				</h:panelGroup>
+				
+				<h:panelGroup rendered="#{facesUtil.hasRole('FUNCIONARIO')}">
+					<a href="#{request.contextPath}/proprietarios" class="zoom btn btn-default btn-lg btn-icon">
+						<i class="fa fa-user-secret fa-4x"></i><br />PROPRIETÁRIOS
+					</a>
+				</h:panelGroup>
+				
+				<a href="#{request.contextPath}/clientes" class="zoom btn btn-primary btn-lg btn-icon">
+					<i class="fa fa-street-view fa-4x"></i><br />CLIENTES
+				</a>
+				
+				<br/>
+				
+				<a href="#{request.contextPath}/apartamentos" class="zoom btn btn-warning btn-lg btn-icon">
+					<i class="fa fa-tags fa-4x"></i><br />APARTAMENTOS
+				</a>
+				
+				<a href="#{request.contextPath}/reservas" class="zoom btn btn-warning btn-lg btn-icon">
+					<i class="fa fa-hotel fa-4x"></i><br />RESERVAS
+				</a>
+				
+				<a href="#{request.contextPath}/estacionamentos" class="zoom btn btn-warning btn-lg btn-icon">
+					<i class="fa fa-car fa-4x"></i><br />ESTACIONAMENTOS
+				</a>
+				
+				<br/>				
+				
+				<a href="#{request.contextPath}/agenda_contatos" class="zoom btn btn-info btn-lg btn-icon">
+					<i class="fa fa-tty fa-4x"></i><br />AGENDA
+				</a>
+				
+				<a href="#{request.contextPath}/caixas" class="zoom btn btn-success btn-lg btn-icon">
+					<i class="fa fa-dollar fa-4x"></i><br />CAIXAS
+				</a>
+				
+				<h:panelGroup rendered="#{caixaService.caixa.dataCaixa!=null}">
+				<a href="#{request.contextPath}/movimentacoes_saida" class="zoom btn btn-danger btn-lg btn-icon">
+					<i class="fa fa-random fa-4x"></i><br />SAÍDAS DO CAIXA
+				</a>
+				</h:panelGroup>
+
+				<ui:remove>
+				<!-- 
+				<p:commandLink styleClass="zoom btn btn-success btn-lg btn-icon"
+					action="#{usuarioService.pageUsuario}">
+					<b:iconAwesome name="download" size="4x" />
+					<br />ENTRADA
+					</p:commandLink>
+
+				<p:commandLink styleClass="zoom btn btn-danger btn-lg btn-icon"
+					action="#{movimentacaoService.saida}">
+					<b:iconAwesome name="external-link-square" size="4x" />
+					<br />SAIDA
+					</p:commandLink> 
+				-->
+				</ui:remove>
+					
+			</h:form>
+			
+		</div>
+
+		<footer id="site-footer">
+			<section style="text-align: right;">Copyright 2016, By bimnascimento@gmail.com</section>
+		</footer>
+
+	</ui:define>
+
+	<ui:define name="script">
+		<script type="text/javascript">
+			var body=$("body");
+				//body.toggleClass("nav-collapse");
+				body.toggleClass("in");
+				//body.addClass("nav-collapse");
+	</script>
+	</ui:define>
+
+</ui:composition>

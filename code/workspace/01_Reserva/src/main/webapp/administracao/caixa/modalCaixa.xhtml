@@ -1,0 +1,72 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:sp="http://www.springframework.org/tags">
+
+	<b:modal id="modalCaixa" title="Caixa" 
+		close-on-escape="false" closable="true" styleClass="fade"
+		backdrop="false">
+		
+		<!-- <p:fieldset legend="NOVO CAIXA"> -->
+		
+		<!-- <h:outputLabel value="* Campos obrigatórios" styleClass="colorGrid" /> -->
+		
+		<h:form styleClass="form-horizontal row-border" id="formCaixa" onkeypress="if (event.keyCode == 13) { return false; }">
+
+			<p:messages id="messagesCaixa" globalOnly="false" autoUpdate="false" showDetail="false" closable="true"
+				showIcon="false" showSummary="true" />
+				
+			<p:panel style="font-size:18px;color:red;text-align:center;">
+				<h:outputText value="CAIXA DO DIA: " style="color:#8B0000 !important" />
+				<b><h:outputText value="#{now}" 
+						style="color:#8B0000 !important" >
+						<f:convertDateTime type="date" pattern="dd/MM/yyyy"/>
+					</h:outputText>
+				</b>
+			</p:panel>
+
+			<ui:remove>
+			<!-- <b:panelGrid colSpans="2,5,5" size="xs">
+				<h:outputLabel value="Perfils" styleClass="control-label" />
+				<b:selectMultiMenu allSelectedText="Todos"
+					includeSelectAllOption="true" nonSelectedText="Selecione" numberDisplayed="1"
+					selectAllText="Selecionar todos" size="10" nSelectedText="selecionados" buttonWidth="130"
+					enableCaseInsensitiveFiltering="true" enableFiltering="true" radiobuttons="false"
+					filterPlaceholder="Procurar" value="#{usuarioService.perfil}">
+					<f:selectItems value="#{perfilService.findAll()}" var="select"
+						itemLabel="#{select.nome}" itemValue="#{select.nome}" />
+				</b:selectMultiMenu>
+				<p:commandButton icon="fa fa-share-square-o" value="ADD" id="addPerfil"
+						action="#{perfilService.add}" process="addPerfil"
+						styleClass="noui zoom btn btn-primary btn-xs" />
+			</b:panelGrid> -->
+			</ui:remove>
+			
+			<ui:remove>
+			<!-- <b:panelGrid colSpans="2,10" size="xs">
+				<h:outputLabel value="Login" styleClass="control-label" />
+				<p:inputText value="#{usuarioService.usuario.login}" />
+			</b:panelGrid> -->
+			</ui:remove>
+			
+			<b:row style="text-align:right;margin:0 10px;">
+
+				<p:commandButton value="CRIAR" icon="fa fa-thumbs-up"
+					action="#{caixaService.saveOrUpdate}" update="messagesCaixa"
+					styleClass="noui zoom btn btn-success" />
+
+			</b:row>
+		</h:form>
+		<!-- </p:fieldset> -->
+	</b:modal>
+
+</ui:composition>

@@ -1,0 +1,54 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:sp="http://www.springframework.org/tags">
+
+	<ui:remove>
+		<!--
+		/////////////////////////////////////////////////////////////////////////
+		//////////     TOP SEARCH CONTENT     ///////////////
+		//////////////////////////////////////////////////////////////////////
+		-->
+	</ui:remove>
+
+	<div class="widget-top-search">
+
+		<span class="icon"><a href="#" class="close-header-search"><i
+				class="fa fa-times" /></a></span>
+		<form id="top-search">
+			<h2>
+				Realize sua <strong>busca</strong>
+			</h2>
+			<div class="input-group" style="width: 95%">
+				<input type="text" name="q" placeholder="buscar..."	class="form-control" /> 
+					<ui:remove>
+					<!-- 
+					<span class="input-group-btn">
+						<button class="btn" type="button" title="With Sound">
+							<i class="fa fa-microphone" />
+						</button>
+						<button class="btn" type="button" title="Visual Keyboard">
+							<i class="fa fa-keyboard-o" />
+						</button>
+						<button class="btn" type="button" title="Advance Search">
+							<i class="fa fa-th" />
+						</button>
+					</span>
+					-->
+					</ui:remove>
+				
+			</div>
+		</form>
+
+	</div>
+
+</ui:composition>

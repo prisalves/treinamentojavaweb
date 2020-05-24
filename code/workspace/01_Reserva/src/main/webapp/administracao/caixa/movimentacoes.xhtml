@@ -1,0 +1,156 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:sp="http://www.springframework.org/tags"
+	template="/template/template.xhtml">
+
+	<ui:define name="title">        
+            MOVIMENTAÇÕES DO CAIXA      
+    </ui:define>
+
+	<!-- <ui:define name="header" /> -->
+	<!-- <ui:define name="slide" /> -->
+	<!-- <ui:define name="search" /> -->
+	<!-- <ui:define name="modal" /> -->
+	<!-- <ui:define name="menuLeft" /> -->
+	<!-- <ui:define name="menuRight" /> -->
+
+	<ui:define name="main">
+
+		<ol class="breadcrumb">
+			<li ><a href="#{request.contextPath}/">Página inicial</a></li>
+			<li ><a href="#{request.contextPath}/caixas">Caixas</a></li>
+			<li class="active"><a href="#{request.contextPath}/movimentacoes">Movimentações</a></li>
+		</ol>
+		<!-- //breadcrumb-->
+
+		<div id="content">
+		
+		<h:form id="filtro">
+			<p:messages id="messagesFiltro" globalOnly="false" autoUpdate="false" showDetail="false" closable="true"
+				showIcon="false" showSummary="true" />
+				
+				
+				
+			<b:panelGrid colSpans="2,8,2" size="xs">
+						<h:outputLabel value="Filtro apartamentos" styleClass="control-label" />
+						<b:selectMultiMenu allSelectedText="Todos"
+							includeSelectAllOption="true" nonSelectedText="Selecione" numberDisplayed="1"
+							selectAllText="Selecionar todos" size="10" nSelectedText="selecionados" buttonWidth="130"
+							enableCaseInsensitiveFiltering="true" enableFiltering="true" radiobuttons="false"
+							filterPlaceholder="Procurar" value="#{movimentacaoService.filtroApartamentos}">
+							<f:selectItems value="#{apartamentoService.findAll().toArray()}" var="select"
+								itemLabel="#{select}" itemValue="#{select.identificador}" />
+						</b:selectMultiMenu>
+			</b:panelGrid>
+			<p:commandButton value="Salvar" icon="fa fa-thumbs-up"
+					action="#{movimentacaoService.atualizaTable}" update="messagesFiltro"
+					styleClass="noui zoom btn btn-success" />
+		</h:form>
+
+			<h:form id="formDataTable">
+			
+				<div style="text-align: center">
+					
+					<ui:remove>
+					<!-- <p:commandLink styleClass="zoom btn btn-success btn-lg" style="margin:10px;" action="#{movimentacaoService.entrada}">
+						<b:iconAwesome name="download" size="3x" />
+						<br/>ENTRADA
+					</p:commandLink> -->
+					</ui:remove>
+					
+					<p:commandLink
+					rendered="#{caixaService.caixa.dataCaixa!=null}" 
+					styleClass="zoom btn btn-danger btn-lg" style="margin:10px;" action="#{movimentacaoService.saida}">
+						<b:iconAwesome name="external-link-square" size="3x" />
+						<br/>SAÍDA DO CAIXA
+						<br/> #{caixaService.caixa}
+					</p:commandLink>
+					
+				</div>
+				
+				<br/>
+				<p:dataTable id="dataTable" value="#{movimentacaoService.lista}"
+					var="item" paginator="true" rows="10" widgetVar="tableMovimentacao"
+					paginatorPosition="bottom" styleClass="table-danger"
+					filteredValue="#{movimentacaoService.filtered}"
+					emptyMessage="Nenhum registro encontrado!" >
+
+						<f:facet name="header">
+							<h:outputText value="Movimentações de caixa do usuário: #{usuarioSistemaService.usernameSistema}" />
+						</f:facet>
+	
+						<p:column headerText="CAIXA" style="text-align:center;">
+							<h:outputText value="#{facesUtil.converteData(item.caixa.dataCaixa,null)}" />
+						</p:column>
+						
+						<p:column headerText="DESCR" style="text-align:center;" >
+							<h:outputText pt:data-toggle="tooltip" pt:data-placement="top" pt:title="#{item.descricao}" value="#{facesUtil.substring(item.descricao,20)}" />
+						</p:column>
+						
+						<p:column headerText="APARTAMENTOS" style="text-align:center;" >
+							<h:outputText pt:data-toggle="tooltip" pt:data-placement="top" pt:title="#{item.apartamentos}" value="#{facesUtil.substring(item.apartamentos,20)}" />
+						</p:column>
+						
+						<p:column headerText="VALOR" style="text-align:center;" >
+							<h:outputText value="#{item.valor}">
+								<f:convertNumber pattern="R$ #,##0.00" />
+							</h:outputText>
+						</p:column>
+						
+						<p:summaryRow>
+				            <p:column colspan="3" style="text-align:right">
+				                <h:outputText value="Total:" />
+				            </p:column>
+				            <p:column>
+				                <h:outputText value="#{movimentacaoService.total}">
+				                    <f:convertNumber pattern="R$ #,##0.00" />
+				                </h:outputText>
+				            </p:column>
+				        </p:summaryRow>
+	
+					</p:dataTable>
+			        
+			</h:form>
+			
+			<ui:remove>
+			<!-- 
+			<h:panelGroup id="movimentacaoBlock">
+				<h:form id="formEntrada" rendered="#{movimentacaoService.tipoMovimentacao.equals('Entrada')}">
+					Entrada ok
+				</h:form>
+				<h:form id="formSaida" rendered="#{movimentacaoService.tipoMovimentacao.equals('Saida')}">
+					saida ok
+				</h:form>
+			</h:panelGroup>
+			-->
+			</ui:remove>
+			
+
+		</div>
+		
+		<ui:include src="modalSaida.xhtml" />
+
+	</ui:define>
+
+	<ui:define name="script">
+	
+		<script type="text/javascript">
+
+				var body=$("body");
+					body.toggleClass("in");
+				
+	</script>
+	
+	</ui:define>
+
+</ui:composition>

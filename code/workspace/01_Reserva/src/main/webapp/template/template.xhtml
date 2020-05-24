@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html
+	lang="#{languageBean.language}"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:lang="#{languageBean.language}"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:sp="http://www.springframework.org/tags">
+
+<h:head>
+
+	<ui:remove>
+		<!--
+		
+		ARQUITETURA
+		https://www.lucidchart.com/documents/view/d33e31c0-4a5f-44e2-8052-1e7ea6a77a82
+		https://www.lucidchart.com/documents/edit/d33e31c0-4a5f-44e2-8052-1e7ea6a77a82
+		
+		Nao carrega font bootsfaces
+		<f:facet name="no-fa">true</f:facet>
+		
+		<meta charset="UTF-8" />
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+		
+		-->
+	</ui:remove>
+	
+	<f:facet name="no-fa">true</f:facet>
+
+	<f:facet name="first">
+		
+		<!--[if IE]>
+			<meta http-equiv='X-UA-Compatible' content="IE=edge,IE=9,IE=8,chrome=1" />
+			<h:outputScript library="plugins" name="html5/html5.js" />
+		<![endif]-->
+
+		<!--[if gte IE 9]
+			<style type="text/css">.gradient {filter: none;}</style>
+		<![endif]-->
+		
+		<!--[if lt IE 9]>
+			<h:outputScript library="plugins" name="html5/ie8-responsive-file-warning.js" />
+			<h:outputScript library="plugins" name="html5/ie/html5shiv.min.js" />
+			<h:outputScript library="plugins" name="html5/ie/respond.min.js" />
+		<![endif]-->
+		<h:outputScript library="plugins" name="html5/ie-emulation-modes-warning.js" />
+		
+		<h:outputStylesheet library="plugins" name="html5/ie10-viewport-bug-workaround.css" />
+		<h:outputScript library="plugins" name="html5/ie10-viewport-bug-workaround.js" />
+		
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width,user-scalable=0,initial-scale=1,maximum-scale=1" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta content="BOXCLICK" name="description" />
+		<meta content="Fabio Nascimento - bimnascimento@gmail.com" name="author" />
+		
+		<!-- <ui:remove> -->
+		<meta http-equiv="pragma" content="no-cache" />
+		<meta http-equiv="cache-control" content="no-cache" />
+		<meta http-equiv="expires" content="0" />
+		<!-- </ui:remove> -->
+		
+		<!-- Title-->
+		<title><ui:insert name="title">SISWEB</ui:insert></title>
+		
+		<!-- Favicons -->
+		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="#{resource['template/logo/apple-touch-icon-144-precomposed.png']}" />
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="#{resource['template/logo/apple-touch-icon-114-precomposed.png']}" />
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="#{resource['template/logo/apple-touch-icon-72-precomposed.png']}" />
+		<link rel="apple-touch-icon-precomposed" href="#{resource['template/logo/apple-touch-icon-57-precomposed.png']}" />
+		<link rel="shortcut icon" type="image/x-icon" href="#{resource['template/logo/favicon.ico']}" />
+		
+		<!-- Jquery Library -->
+		<h:outputScript library="plugins" name="jquery/jquery-1.11.3.min.js" />
+		<h:outputScript library="plugins" name="jquery/jquery-2.1.4.min.js" />
+		<h:outputScript library="plugins" name="jquery-ui/jquery-ui-1.11.2.min.js" />
+		<h:outputScript library="plugins" name="jquery/jquery-migrate-1.2.1.min.js" />
+
+	</f:facet>
+	<f:facet name="middle">
+		<!-- MIDDLE -->
+	</f:facet>
+	<f:facet name="last">
+		<!-- LAST -->
+		
+	</f:facet>
+	
+	<ui:remove>
+		<!--
+		BOOTSTRAP
+		<h:outputStylesheet library="plugins" name="bootstrap/css/bootstrap.css" />
+		<h:outputStylesheet library="plugins" name="bootstrap/css/bootstrap-theme.css" />
+		-->
+	</ui:remove>
+	<h:outputScript library="plugins" name="bootstrap/js/bootstrap.js" />
+	
+	<ui:remove>
+		<!--
+		<style>
+	         @import url("#{resource['template/css/style.css']}");
+	    </style>
+		ANIMATE CSS
+		https://daneden.github.io/animate.css/
+		<h:outputStylesheet library="plugins" name="animate/animate.min.css" />
+		-->
+	</ui:remove>
+	
+	<ui:remove>
+		<!-- 
+		<h:outputStylesheet library="template" name="css/bootstrap.css" />
+		<h:outputStylesheet library="template" name="css/base.css" />
+		<h:outputStylesheet library="template" name="css/style.css" /> 
+		-->
+	</ui:remove>
+	
+</h:head>
+<h:body class="leftMenu nav-collapse in">
+<f:facet name="last">
+		<ui:remove>
+			<!--
+			THEMA
+			-->
+		</ui:remove>
+		<h:outputStylesheet library="template" name="css/all.css" />
+</f:facet>
+
+<a href="#{request.contextPath}" class="logo-menu"></a>
+
+<div id="wrapper" class="wrapper-shadow">
+
+	<p:outputPanel id="msmLoading" style="text-align:center;display:none;">
+		<h:outputText value=" AGUARDE, CARREGANDO ... " />
+		<br /><h:graphicImage library="template" name="img/load2.gif" />
+		<br /><br /><h:outputLink value="#{pageContext.request.contextPath}" target="_top">Recarregar Página</h:outputLink>
+	</p:outputPanel>
+	
+	<ui:remove>
+		<!--
+		JBOX 
+		http://stephanwagner.me/jBox/get_started
+		-->
+	</ui:remove>
+	<h:outputStylesheet library="plugins" name="jbox/jBox.css" />
+	<h:outputScript library="plugins" name="jbox/jBox.js" />
+	<h:outputScript library="template" name="js/jbox.js" />
+	
+	<p:ajaxStatus onstart="load.open()" oncomplete="load.close()"  />
+	<script>
+    $(document).ready(function(){
+    	load.open()
+    });
+    $(window).load(function() {
+    	load.close() 
+    });
+	</script>
+
+	<ui:remove>
+	<!-- 
+	<ui:insert name="loading">
+		<ui:include src="loading.xhtml" />
+	</ui:insert> 
+	-->
+	</ui:remove>
+
+	<ui:insert name="header">
+			<ui:include src="header.xhtml" />
+	</ui:insert>
+	
+	<ui:insert name="slide">
+			<ui:include src="slide.xhtml" />
+	</ui:insert>
+	
+	<ui:insert name="search">
+			<ui:include src="search.xhtml" />
+	</ui:insert>
+	
+	<ui:insert name="login" />
+	
+	<ui:insert name="mainPrincipal">
+	<div id="main" class="sombra">
+		
+				<h:form>
+					<p:confirmDialog id="deleteDialog" showEffect="fade" widgetVar="deleteDialogWidget"
+						hideEffect="fade" closable="false" global="true" visible="false"
+						style="text-align:center;" severity="alert" closeOnEscape="false"
+						appendTo="@(body)">
+						<p:commandButton value="Sim" type="button" 
+							style="margin-right:5px;" styleClass="btn-danger ui-confirmdialog-yes zoom"
+							icon="ui-icon-check" global="true" 
+							update="@(form)" process="@this" resetValues="true"
+							immediate="true" ajax="false" oncomplete="confirmation.hide(); return false;"/>
+						<p:commandButton value="Não" type="button"
+							style="margin-left:5px;" styleClass="ui-confirmdialog-no zoom"
+							icon="ui-icon-close" />
+					</p:confirmDialog>
+
+					<p:messages id="msgs" showDetail="true" showSummary="true"
+						showIcon="false" autoUpdate="false" globalOnly="false"
+						closable="true">
+						<p:effect type="pulsate" event="load" delay="200" />
+					</p:messages>
+
+				</h:form>
+
+				<h:form id="barraTopCaixa">
+					<h:panelGroup rendered="#{caixaService.caixa.dataCaixa!=null}" styleClass="barratop-caixa">
+						<a href="#{request.contextPath}/caixas">CAIXA <b>#{facesUtil.converteData(caixaService.caixa.dataCaixa,null)}</b> ABERTO</a> 
+						| <a href="#{request.contextPath}/movimentacoes_saida">SAÍDAS</a>
+						<!-- | <a href="#{request.contextPath}/movimentacoes_entrada">ENTRADAS</a> -->
+						| <a href="#{request.contextPath}/reservas">RESERVAS</a>
+						| SALDO ATUAL: <h:outputText value="#{caixaService.saldoAtual()}">
+						
+									<f:convertNumber pattern="R$ #,##0.00" />
+								</h:outputText>
+					</h:panelGroup>
+				</h:form>
+				<ui:insert name="main" />
+				<h:form style="display: none;"><b:selectMultiMenu /></h:form>
+				
+	</div>
+	</ui:insert>
+	
+	<ui:insert name="modal">
+			<ui:include src="modal.xhtml" />
+	</ui:insert>
+	
+	<ui:insert name="menuLeft">
+			<ui:include src="menuLeft.xhtml" />
+	</ui:insert>
+	
+	<ui:insert name="menuRight">
+			<ui:include src="menuRight.xhtml" />
+	</ui:insert>
+	
+	<ui:insert name="config">
+			<ui:include src="config.xhtml" />
+	</ui:insert>
+	
+	
+		
+</div>
+<!-- //wrapper-->
+
+
+
+	<ui:remove>
+	<!--
+		//////////////////////////////////////////////////////////////
+		//////////     PLUGINS     //////////////////////////////////
+		///////////////////////////////////////////////////////////
+	-->
+	</ui:remove>
+	
+	<ui:remove>
+		<!-- JQUERY -->
+		<!-- 
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<h:outputScript library="plugins" name="jquery/jquery.cookie.min.js" />
+		<h:outputScript library="plugins" name="jquery/jquery-1.11.3.min.js" />
+		<h:outputScript library="plugins" name="jquery/jquery-2.1.4.min.js" />
+		<h:outputScript library="plugins" name="jquery/jquery-migrate-1.2.1.min.js" />
+		 -->
+	</ui:remove>
+	
+	<h:outputScript library="plugins" name="jquery-cookies/jquery.cookies.min.js" />
+	<h:outputScript library="plugins" name="jquery-block-ui/jquery.blockUI.min.js" />
+	<h:outputScript library="plugins" name="translate/jqueryTranslator.min.js" />
+	<h:outputScript library="plugins" name="retina/retina.min.js" />
+	<!-- <h:outputScript library="plugins" name="jquery-moment/moment.js" /> -->
+	<h:outputScript library="plugins" name="jquery-moment/moment-with-locales.js" />
+	<h:outputScript library="plugins" name="prettify/prettify.js" />
+	
+	<ui:remove>
+		<!-- 
+		MOBILE
+		-->
+	</ui:remove>
+	<h:outputScript library="plugins" name="mobile/mobile.js" />
+	
+	<ui:remove>
+		<!-- 
+		ACTUATE - animacao 
+		-->
+	</ui:remove>
+	<h:outputScript library="plugins" name="actuate/actuate-animate.js" />
+	
+	<ui:remove>
+		<!--
+		VALIDETTA 
+		http://lab.hasanaydogdu.com/validetta/
+		-->
+	</ui:remove> 
+	<h:outputStylesheet library="plugins" name="validetta/validetta.min.css" />
+	<h:outputScript library="plugins" name="validetta/validetta.min.js" />
+	<h:outputScript library="plugins" name="validetta/validettaLang-pt-BR.js" />
+
+	<ui:remove>
+		<!--
+		Modernizr Library For HTML5 And CSS3
+		<h:outputScript library="plugins" name="modernizr/modernizr.js" />
+		<h:outputScript library="plugins" name="modernizr/modernizr-custom.js" />
+		<h:outputScript library="plugins" name="modernizr/modernizr.2.8.3.js" />
+		-->
+	</ui:remove>
+	<h:outputScript library="plugins" name="modernizr/modernizr.2.8.3.js" />
+	
+	<ui:remove>
+		<!--
+		MMENU 
+		http://mmenu.frebsite.nl/download.html
+		<h:outputScript library="plugins" name="mmenu/jquery.mmenu.min.all.js" />
+		-->
+	</ui:remove>
+	<h:outputScript library="plugins" name="mmenu/jquery.mmenu.js" />
+	
+	<h:outputScript library="template" name="js/styleswitch.js" />
+	
+	<h:outputScript library="plugins" name="form/form.js" />
+	
+	<h:outputScript library="plugins" name="datetime/datetime.js" />
+	
+	<h:outputScript library="plugins" name="chart/chart.js" />
+	
+	<h:outputScript library="plugins" name="pluginsForBS/pluginsForBS.js" />
+	
+	<h:outputScript library="template" name="js/primefaces.js" />
+	<h:outputScript library="template" name="js/jquery.maskMoney.js" />
+	<h:outputScript library="template" name="js/mascara.js" />
+	
+	
+	<h:outputStylesheet library="plugins" name="datable/jquery.dataTables.min.css" />
+	<h:outputScript library="plugins" name="datable/jquery.dataTables.min.js" />
+	
+	<h:outputStylesheet library="plugins" name="datable/dataTables.bootstrap.min.css" />
+	<h:outputScript library="plugins" name="datable/dataTables.bootstrap.min.js" />
+	
+	<h:outputStylesheet library="plugins" name="datable/select.dataTables.min.css" />
+	<h:outputStylesheet library="plugins" name="datable/select.bootstrap.min.css" />
+	<h:outputScript library="plugins" name="datable/dataTables.select.min.js" />
+	
+	<h:outputStylesheet library="plugins" name="datable/fixedHeader.dataTables.min.css" />
+	<h:outputScript library="plugins" name="datable/dataTables.fixedHeader.min.js" />
+	
+	<h:outputStylesheet library="plugins" name="datable/buttons.dataTables.css" />
+	<h:outputScript library="plugins" name="datable/dataTables.buttons.min.js" />
+	
+	<h:outputStylesheet library="plugins" name="datable/dataTables.colVis.css" />
+	<h:outputScript library="plugins" name="datable/dataTables.colVis.js" />
+	<h:outputScript library="plugins" name="datable/buttons.colVis.min.js" />
+	
+	<h:outputScript library="plugins" name="datable/buttons.print.min.js" />
+	
+	<h:outputStylesheet library="plugins" name="bootstrap-select/css/bootstrap-select.min.css" />
+	<h:outputScript library="plugins" name="bootstrap-select/js/bootstrap-select.min.js" />
+	<h:outputScript library="plugins" name="bootstrap-select/js/i18n/defaults-pt_BR.min.js" />
+	
+	<!-- 
+	<h:outputStylesheet library="plugins" name="datable/editor.dataTables.min.css" />
+	<h:outputScript library="plugins" name="datable/dataTables.editor.min.js" /> 
+	-->
+	
+	<h:outputStylesheet library="plugins" name="datable/responsive.bootstrap.min.css" />
+	<h:outputScript library="plugins" name="datable/dataTables.responsive.min.js" /> 
+	<h:outputScript library="plugins" name="datable/responsive.bootstrap.min.js" />
+	
+	<h:outputScript library="template" name="js/datatable.js" /> 
+	
+	<ui:remove>
+		<!--
+		
+		MISCELLANEOUS 
+		https://github.com/infusion/jQuery-xcolor
+		https://github.com/ralivue/notific8
+		https://github.com/martinaglv/jQuery-FullScreen
+		http://aino.github.io/throbber.js/
+		http://eonasdan.github.io/bootstrap-datetimepicker/
+		https://github.com/dangrossman/bootstrap-daterangepicker
+		http://timeago.yarp.com/
+		http://www.jacklmoore.com/autosize/
+		http://www.codingdrama.com/bootstrap-markdown/
+		
+		<h:outputScript library="plugins" name="miscellaneous/jquery.xcolor.min.js" />
+		<h:outputScript library="plugins" name="miscellaneous/prettify.min.js" />
+		<h:outputScript library="plugins" name="miscellaneous/jquery.notific8.min.js" />
+		<h:outputScript library="plugins" name="miscellaneous/jquery.fullscreen.js" />
+		<h:outputScript library="plugins" name="miscellaneous/throbber.js" />
+		<h:outputScript library="plugins" name="miscellaneous/jquery.treeview.js" />
+		<h:outputScript library="plugins" name="miscellaneous/moment.js" />
+		<h:outputScript library="plugins" name="miscellaneous/bootstrap-datetimepicker.min.js" />
+		<h:outputScript library="plugins" name="miscellaneous/daterangepicker.js" />
+		<h:outputScript library="plugins" name="miscellaneous/jquery.timeago.js" />
+		<h:outputScript library="plugins" name="miscellaneous/autosize.js" />
+		<h:outputScript library="plugins" name="miscellaneous/bootstrap-markdown.js" />
+		<h:outputScript library="plugins" name="miscellaneous/icheck.min.js" />
+		<h:outputStylesheet library="plugins" name="miscellaneous/bootstrap-switch.min.css" />
+		<h:outputScript library="plugins" name="miscellaneous/bootstrap-switch.min.js" />
+		<h:outputStylesheet library="plugins" name="miscellaneous/bootstrap-tagsinput.css" />
+		<h:outputScript library="plugins" name="miscellaneous/bootstrap-tagsinput.min.js" />
+		
+		-->
+	</ui:remove>
+	
+	<ui:remove>
+		<!--
+		MULTISELECT
+		<h:outputScript library="plugins" name="multiselect/js/bootstrap-multiselect.js" />
+		<h:outputStylesheet library="plugins" name="multiselect/css/bootstrap-multiselect.css" />
+		-->
+	</ui:remove>
+	
+	
+	<ui:remove>
+		<!--
+		THEMA 
+		-->
+	</ui:remove>
+	<h:outputScript library="template" name="js/custom.js" />
+
+	<ui:remove>
+		<!--
+		SCRIPTS 
+		-->
+	</ui:remove>
+	<h:outputScript library="template" name="js/script.js" />
+	<ui:insert name="script" />
+	
+	<h:outputScript rendered="#{param['acesso']==false}">
+	 jQuery(window).load(function(e) {
+	 	notice('Erro!','Você não tem permissão <br/> para executar esta acão.','vermelho',8000,'bling1');
+	 });
+	</h:outputScript>
+	
+</h:body>
+</html>

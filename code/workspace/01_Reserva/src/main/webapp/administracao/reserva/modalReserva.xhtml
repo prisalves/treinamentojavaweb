@@ -1,0 +1,315 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/tags"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:sp="http://www.springframework.org/tags">
+	
+	<!-- ADD -->
+	<ui:include src="../pessoa/modalCliente.xhtml" />
+	<ui:include src="../apartamento/modalApartamento.xhtml" />
+	<ui:include src="modalEstacionamento.xhtml" />
+	
+	<!-- MODAL -->
+	<b:modal id="modalReserva" title="Reserva" styleClass="fade" 
+		close-on-escape="false" closable="true" backdrop="false">
+		<h:form styleClass="form-horizontal row-border" id="formReserva">
+		
+			<!-- MENSAGENS -->
+			<p:messages id="messagesReserva" globalOnly="false"
+				autoUpdate="false" showDetail="false" closable="true"
+				showIcon="false" showSummary="true" />
+				
+			<!-- SITUACAO -->
+			<ui:remove>
+			<!-- 
+			<b:panelGrid colSpans="4,8" size="sm">
+				<h:outputLabel value="Situação:" styleClass="control-label" />
+				<h:panelGroup layout="block" >
+					<p:selectOneMenu style="margin-top: 4px;width:100%;" appendTo="@(this)" 
+						value="#{reservaService.reserva.situacao}" >
+			            <f:selectItem itemLabel="Reserva" itemValue="reserva" />
+			            <f:selectItem itemLabel="Aguardando pagamento" itemValue="aguardandoPagamento" />
+			            <f:selectItem itemLabel="Pago parcialmente" itemValue="pagoParcialmente" />
+			            <f:selectItem itemLabel="Cancelado" itemValue="cancelado" />
+			            <f:selectItem itemLabel="CheckIn" itemValue="checkIn" />
+			            <f:selectItem itemLabel="CheckOut" itemValue="checkOut" />
+			            <f:selectItem itemLabel="Estendido" itemValue="estendido" />
+			        </p:selectOneMenu>
+		        </h:panelGroup>
+			</b:panelGrid>
+			 -->
+			</ui:remove>
+			<b:panelGrid colSpans="2,8,2" size="sm" id="selectSituacao" >
+					<h:outputLabel value="Situação" styleClass="control-label" />
+					<b:selectMultiMenu span="12" 
+						allSelectedText="Todos selecionados"
+						includeSelectAllOption="true"
+						nonSelectedText="Selecione"
+						selectAllText="Selecionar todos"
+						maxHeight="300" radiobuttons="true"
+						enableCaseInsensitiveFiltering="true" enableFiltering="true"
+						required="true" requiredMessage="Situação Obrigatório"
+						filterPlaceholder="Procurar" value="#{reservaService.reservaTipo}">
+						<f:selectItems value="#{reservaTipoService.findAll()}" var="select" 
+							itemLabel="#{select.nome}" itemValue="#{select.nome}" />
+					</b:selectMultiMenu>
+			</b:panelGrid>
+			
+			<!-- CLIENTE -->
+			<b:panelGrid colSpans="2,5,5" size="sm" id="selectCliente">
+				<h:outputLabel value="Cliente:" styleClass="control-label" />
+				<ui:remove>
+				<!-- 
+				<p:selectOneMenu style="margin-top: 4px;width:100%;" appendTo="@(this)" filter="true" 
+				 converter="#{componentConverterPessoa}" filterMatchMode="contains" id="cliente"
+				 required="true" requiredMessage="Cliente: Campo obrigatório!"
+					value="#{reservaService.reserva.cliente}" >
+		            <f:selectItem itemLabel="Selecione" itemValue="" />
+		            <f:selectItems value="#{pessoaService.listaClientesSelect()}" var="select" 
+							itemLabel="#{select.nome}" itemValue="#{select}" />
+		        </p:selectOneMenu>
+		         -->
+		        </ui:remove>
+		        <b:selectMultiMenu span="12" 
+						allSelectedText="Todos selecionados"
+						includeSelectAllOption="true"
+						nonSelectedText="Selecione"
+						selectAllText="Selecionar todos"
+						maxHeight="300" radiobuttons="true"
+						enableCaseInsensitiveFiltering="true" enableFiltering="true"
+						required="true" requiredMessage="Cliente Obrigatório"
+						filterPlaceholder="Procurar" value="#{reservaService.cliente}">
+						<f:selectItem itemValue="" itemLabel="Selecione"/>
+						<f:selectItems value="#{pessoaService.listaClientesSelect()}" var="select" 
+							itemLabel="#{select.nome}" itemValue="#{select.nome}" />
+				</b:selectMultiMenu>
+				<p:commandButton icon="fa fa-share-square-o" value="ADD CLIENTE"
+					action="#{pessoaService.add('Cliente')}" process="@this" 
+					styleClass="noui zoom btn btn-primary btn-xs" />
+			</b:panelGrid>	
+			
+			<!-- APARTAMENTO -->
+			<b:panelGrid colSpans="2,5,5" size="sm" id="selectApartamento">
+				<h:outputLabel value="Apartamento:" styleClass="control-label" />
+				<ui:remove>
+				<!--
+				<p:selectOneMenu style="margin-top: 4px;width:100%;" appendTo="@(this)" filter="true" 
+				 converter="#{componentConverterApartamento}" filterMatchMode="contains" id="apartamento"
+				 required="true" requiredMessage="Apartamento: Campo obrigatório!"
+					value="#{reservaService.reserva.apartamento}" >
+		            <f:selectItem itemLabel="Selecione" itemValue="" />
+		            <f:selectItems value="#{apartamentoService.findAll().toArray()}" var="select" 
+							itemLabel="#{select}" itemValue="#{select}" />
+					<p:ajax event="change" process="@this" listener="#{reservaService.atualizaDatas}" />
+		        </p:selectOneMenu>
+		        -->
+		        </ui:remove>
+		        <b:selectMultiMenu span="12" styleClass="atualizaDatas"
+						allSelectedText="Todos selecionados"
+						includeSelectAllOption="true"
+						nonSelectedText="Selecione"
+						selectAllText="Selecionar todos"
+						maxHeight="200" radiobuttons="true" 
+						enableCaseInsensitiveFiltering="true" enableFiltering="true"
+						required="true" requiredMessage="Apartamento Obrigatório"
+						filterPlaceholder="Procurar" value="#{reservaService.apartamento}">
+						<f:selectItem itemLabel="Selecione" itemValue="" />
+						<f:selectItems value="#{apartamentoService.findAll('identificador','ASC')}" var="select" 
+							itemLabel="#{select}" itemValue="#{select.predio}-#{select.identificador}" />
+				</b:selectMultiMenu>
+				<p:commandButton icon="fa fa-share-square-o" value="ADD APARTAMENTO"
+					action="#{apartamentoService.add}" process="@this" 
+					styleClass="noui zoom btn btn-primary btn-xs" />
+			</b:panelGrid>
+			<script type="text/javascript">
+			$(".atualizaDatas ul > li").change(function() {
+				  atualizaDatas();
+			});
+			</script>
+			<p:remoteCommand name="atualizaDatas" action="#{reservaService.atualizaDatas}" process="formReserva" />
+			
+			<b:panelGrid colSpans="2,5,5" size="sm" id="selectEstacionamentos" >
+				<h:outputLabel value="Estacionamentos" styleClass="control-label" />
+				<b:selectMultiMenu span="12" 
+					allSelectedText="Todos selecionados"
+					includeSelectAllOption="true"
+					nonSelectedText="Selecione"
+					selectAllText="Selecionar todos"
+					maxHeight="300"
+					enableCaseInsensitiveFiltering="true" enableFiltering="true"
+					filterPlaceholder="Procurar" value="#{reservaService.estacionamentos}">
+					<f:selectItem itemValue="" itemLabel="VAZIO" noSelectionOption="true"/>
+					<f:selectItems value="#{estacionamentoService.findAll('identificador','ASC')}" var="select" 
+						itemLabel="#{select}" itemValue="#{select.identificador}" />
+				</b:selectMultiMenu>
+				<p:commandButton icon="fa fa-share-square-o" value="ADD ESTACIONAMENTO"
+					action="#{estacionamentoService.add}" process="@this"
+					styleClass="noui zoom btn btn-primary btn-xs" />
+			</b:panelGrid>
+			
+			<!-- PRETENCAO FIM -->
+			<b:panelGrid colSpans="2,4,2,4" size="sm" id="pretencaoID">
+			
+				<h:outputLabel value="INICIO:" styleClass="control-label" />
+				<p:calendar styleClass="datetimepicker1" id="pretencaoInicio" mask="true" 
+					required="true" requiredMessage="Data inicio: Campo obrigatório!" widgetVar="pretencaoInicioVar"
+					mindate="#{reservaService.pretencaoInicio}" locale="pt"
+					value="#{reservaService.reserva.dataPretencaoInicio}" pattern="dd/MM/yyyy HH:mm" >
+					<p:ajax event="change" process="@this" listener="#{reservaService.atualizaDatas}" />
+				</p:calendar>
+				
+				<h:outputLabel value="FIM:" styleClass="control-label" />
+				<p:calendar styleClass="datetimepicker2" id="pretencaoFim" mask="true" locale="pt" lang="pt"
+				required="true" requiredMessage="Data fim: Campo obrigatório!" widgetVar="pretencaoFimVar"
+					mindate="#{reservaService.reserva.dataPretencaoInicio}" pattern="dd/MM/yyyy HH:mm" 
+					value="#{reservaService.reserva.dataPretencaoFim}" >
+				<p:ajax event="change" process="@this" listener="#{reservaService.atualizaDatas}" />
+				</p:calendar>
+					
+			</b:panelGrid>
+			
+			
+			<!-- VALORES -->
+			<h:panelGroup id="valores" >
+			<b:panelGrid colSpans="4,8" size="sm" rendered="#{ (reservaService.reserva.apartamento.valorDiaria!=null and reservaService.reserva.dataPretencaoInicio!=null and reservaService.reserva.dataPretencaoFim!=null) }">
+				<h:outputLabel value="Pretenção:" styleClass="control-label" />
+				<h:panelGroup layout="block">
+					----------------------------
+				    <h:outputText escape="false" value="#{reservaService.valorDiaria()}" />
+				    <h:outputText escape="false" value="#{reservaService.valorReserva()}" />
+				    <h:outputText escape="false" value="#{reservaService.valorPago()}" />
+				    <br/>
+				    ----------------------------
+				    <h:panelGroup rendered="#{reservaService.reserva.apartamento.apartamentoDiarias.size()>0}" style="margin-bottom:5px;">
+				    <ui:repeat value="#{reservaService.reserva.apartamento.apartamentoDiarias.toArray()}" var="apDiaria">
+			    		<br/>
+			    		de <h:outputText value="#{apDiaria.dataInicio}" ><f:convertDateTime type="date" pattern="dd/MM/yyyy"/></h:outputText>
+						a <h:outputText value="#{apDiaria.dataFim}" ><f:convertDateTime type="date" pattern="dd/MM/yyyy"/></h:outputText>
+						[ <b><h:outputText value="R$ #{apDiaria.valor}" ><f:convertNumber pattern="#,##0.00" /></h:outputText></b>
+						- <h:outputText value="#{apDiaria.nome}" />
+						]
+					</ui:repeat>
+					</h:panelGroup>
+				</h:panelGroup>
+			</b:panelGrid>
+			</h:panelGroup>
+			
+			<!-- MOVIMENTACOES -->
+			<h:panelGroup layout="block" id="formMovimentacao">
+			<b:row rendered="#{reservaService.reserva.reservaMovimentacoes.size()>0}" style="margin-bottom:5px;">
+					<b:row styleClass="show-grid" >
+				    	<b:column col-sm="10" offset-sm="1">
+				    	--------------------------------------------------------<br/>
+				    	<b>Caixa | Tipo pagamento | Valor | Descrição</b>  
+				    	</b:column>
+				    </b:row>
+				    <ui:repeat value="#{reservaService.reserva.reservaMovimentacoes.toArray()}" var="item">
+						<b:row styleClass="show-grid" style="margin-bottom:3px;" >
+					    	<b:column col-sm="10" offset-sm="1">
+					    		<b><h:outputText value="#{item.caixa.operador}" /></b> - <h:outputText value="#{item.caixa}" />
+					    		| <b><h:outputText value="#{item.tipoPagamento}" /></b> 
+					    		| <b><h:outputText style="color:#{(item.tipoPagamento.equals('desconto') or item.tipoPagamento.equals('devolucao'))?'red':'#1e9b10'}" value="R$ #{item.valor}" ><f:convertNumber pattern="#,##0.00" /></h:outputText></b> 
+					    		| <h:outputText value="#{item.movimentacao}" />
+					    	</b:column>
+					    </b:row>
+					</ui:repeat>
+			</b:row>
+			</h:panelGroup>
+			
+			<b:panelGrid colSpans="2,10" size="sm" id="formAddMovimentacao">
+				<h:outputLabel value="Movimentações:" styleClass="control-label" style="margin-top: 3px;" />
+				<b:panelGrid colSpans="4,3,3,2" size="sm">
+					<p:selectOneMenu style="margin-top: 4px;width:100%;" appendTo="@(this)" 
+						value="#{reservaService.reservaMovimentacao.tipoPagamento}" >
+			            <f:selectItem itemLabel="Dinheiro" itemValue="dinheiro" />
+			            <f:selectItem itemLabel="Cheque" itemValue="cheque" />
+			            <f:selectItem itemLabel="Cartão" itemValue="cartao" />
+			            <f:selectItem itemLabel="Deposito" itemValue="deposito" />
+			            <f:selectItem itemLabel="Devolução" itemValue="devolucao" />
+			            <f:selectItem itemLabel="Desconto" itemValue="desconto" />
+			            <f:selectItem itemLabel="Acrescimo" itemValue="acrescimo" />
+			            <f:selectItem itemLabel="Diária extra" itemValue="diariaExtra" />
+			        </p:selectOneMenu>
+			        <p:inputText size="8" value="#{reservaService.reservaMovimentacao.valor}" pt:placeholder="valor"
+						onkeyup="moeda(this)" maxlength="10" id="valorDiaria" style="padding:2px;margin-top: 3px;">
+						<f:convertNumber pattern="#,##0.00" />
+					</p:inputText>
+					<b:inputText maxlength="100" pt:placeholder="Descrição" value="#{reservaService.reservaMovimentacao.movimentacao}" 
+					style="margin-top: 3px;"/>
+					<p:commandButton style="margin-top:4px;" styleClass="zoom btn-primary btn-xs" 
+						actionListener="#{reservaService.addMovimentacao}" process="formAddMovimentacao" 
+						update="formReserva:formAddMovimentacao formReserva:formMovimentacao formReserva:valores" icon="fa fa-plus-circle" /> 
+						
+				</b:panelGrid>
+			</b:panelGrid>
+
+
+			<!-- QUANTIDADE PESSOAS -->
+			<div class="form-inline" style="margin-bottom: 10px;">
+				<div class="form-group">
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Quantidade adultos:"
+							styleClass="control-label" />
+						<h:panelGroup layout="block" style="margin-right:10px;">
+							<p:spinner style="margin-left: 10px; margin-top: 4px;" size="2"
+								min="1" max="50"
+								value="#{reservaService.reserva.quantidadeAdulto}" />
+						</h:panelGroup>
+					</h:panelGrid>
+				</div>
+				<div class="form-group">
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Quantidade crianças:"
+							styleClass="control-label" />
+						<h:panelGroup layout="block">
+							<p:spinner style="margin-left: 10px; margin-top: 4px;" size="2"
+								min="0" max="100"
+								value="#{reservaService.reserva.quantidadeCrianca}" />
+						</h:panelGroup>
+					</h:panelGrid>
+				</div>
+			</div>
+			
+			<!-- COM ANIMAL / COM VAGA -->
+			<div class="form-inline" style="margin-bottom: 10px;">
+				<div class="form-group">
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Com animal:" styleClass="control-label" />
+						<h:panelGroup layout="block" style="margin-right:10px;">
+							<p:selectBooleanCheckbox style="margin: 6px 0px 0px 10px;" value="#{reservaService.reserva.comAnimal}" />
+						</h:panelGroup>
+					</h:panelGrid>
+				</div>
+				<div class="form-group">
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Qnt vagas para carro:" styleClass="control-label" />
+						<h:panelGroup layout="block" style="margin-right:10px;">
+							<p:spinner style="margin-left: 10px; margin-top: 4px;" size="2"
+								min="0" max="50"
+								value="#{reservaService.reserva.qntVagas}" />
+						</h:panelGroup>
+					</h:panelGrid>
+				</div>
+			</div>
+			
+			<!-- SUBMIT -->
+			<b:row style="text-align:right;margin:0 10px;">
+				<p:commandButton value="Enviar" icon="fa fa-thumbs-up" 
+					action="#{reservaService.saveOrUpdate}" update="messagesReserva"
+					styleClass="noui zoom btn btn-success" />
+			</b:row>
+		</h:form>
+		<!-- FIM FORM -->
+	</b:modal>
+	<!-- FIM MODAL -->
+	
+
+</ui:composition>
