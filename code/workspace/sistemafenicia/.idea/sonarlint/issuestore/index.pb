@@ -1,0 +1,25 @@
+
+l
+<src/main/java/sistemafenicia/service/ApartamentoService.java,c\7\c7d6c7096cc2eff1a428726cf1c46d676f0e4103
+b
+2src/main/webapp/bkp/jboss-deployment-structure.xml,b\7\b7e2d850d3dcbd755f1ef625e31df5974df1fbbc
+O
+src/main/webapp/WEB-INF/web.xml,2\e\2e22b6edd746fa3dc40ad7276c87c8d87d72a392
+^
+.src/main/webapp/WEB-INF/applicationContext.xml,0\9\098550351661f776bec95040b2d50042c4599987
+`
+0src/main/webapp/WEB-INF/.faces-config.xml.jsfdia,f\4\f4c3539646098d2d35b36267426ab1c7e26bc152
+X
+(src/main/webapp/WEB-INF/faces-config.xml,9\2\921ab541b29cd2aba50bbba38a0af79890ebe16a
+b
+2src/main/webapp/WEB-INF/mvc-dispatcher-servlet.xml,0\4\042ded734e88486d0aab99b680f106ce70502936
+b
+2src/main/java/sistemafenicia/scope/ViewScope2.java,b\c\bcd7929994a0b2760b9f9b99990ff7050b2fe000
+_
+/src/main/java/sistemafenicia/model/Usuario.java,f\4\f44c1fc57c9d42f0dab2511433931431f1c40c7d
+p
+@src/main/java/sistemafenicia/scope/ViewScopeViewMapListener.java,7\f\7f60e2ab26af8b816b932cdf4e662494c99a5ccd
+a
+1src/main/java/sistemafenicia/scope/ViewScope.java,7\5\75b7866e9cf498160ac13f85090bf7ce2995bac9
+7
+pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
