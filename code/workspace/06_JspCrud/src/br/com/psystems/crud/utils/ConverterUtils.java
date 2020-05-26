@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package br.com.psystems.crud.utils;
 
 import org.apache.log4j.Logger;
@@ -18,7 +16,7 @@ public class ConverterUtils {
 	public static Double convertStringToDouble(String value) throws ConverterException {
 		try {
 			if (null != value) {
-				return Double.parseDouble(value.replace(",", "."));//FIXME Fazer uso do pacote Apache Commons Lang
+				return Double.parseDouble(value.replace(",", ".")); //FIXME Fazer uso do pacote Apache Commons Lang
 			} else {
 				return null;
 			}
@@ -31,7 +29,7 @@ public class ConverterUtils {
 	public static Integer convertStringToInteger(String value) throws ConverterException {
 		try {
 			if (null != value) {
-				return Integer.parseInt(value);//FIXME Fazer uso do pacote Apache Commons Lang
+				return Integer.parseInt(value); //FIXME Fazer uso do pacote Apache Commons Lang
 			} else {
 				return null;
 			}

@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package br.com.psystems.crud.bind;
 
 import javax.servlet.http.HttpServletRequest;

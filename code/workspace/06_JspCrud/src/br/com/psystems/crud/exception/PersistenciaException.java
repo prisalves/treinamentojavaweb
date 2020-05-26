@@ -1,14 +1,10 @@
-/**
- * 
- */
+
 package br.com.psystems.crud.exception;
 
 
 public class PersistenciaException extends Exception {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 
 	public PersistenciaException() {

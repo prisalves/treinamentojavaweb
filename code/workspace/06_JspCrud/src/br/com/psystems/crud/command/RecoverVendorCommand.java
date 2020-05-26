@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package br.com.psystems.crud.command;
 
 import javax.servlet.ServletException;
@@ -13,13 +11,10 @@ import br.com.psystems.crud.model.domain.Vendor;
 
 public class RecoverVendorCommand extends AbstractCommand implements ICommand {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 7606485709102366372L;
 	
 	private static final String SUCCESS = "updatevendor.jsp";
-//	private static final String ERROR = "listvendor.jsp";
 	
 	private VendorDAO vendorDAO;
 

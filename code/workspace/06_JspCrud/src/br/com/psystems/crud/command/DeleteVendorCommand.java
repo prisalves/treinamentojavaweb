@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package br.com.psystems.crud.command;
 
 import javax.servlet.ServletException;
@@ -12,9 +10,7 @@ import br.com.psystems.crud.model.dao.VendorDAO;
 
 public class DeleteVendorCommand extends AbstractCommand implements ICommand {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -813686630847825683L;
 
 	private static final String SUCCESS = "listvendor.jsp";

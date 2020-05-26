@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package br.com.psystems.crud.model.domain;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -9,9 +7,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class Product implements BaseDomain {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 6048749574413769644L;
 
 	private Integer id;

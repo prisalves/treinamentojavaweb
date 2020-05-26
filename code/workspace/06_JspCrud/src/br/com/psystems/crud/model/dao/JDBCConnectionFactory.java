@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package br.com.psystems.crud.model.dao;
 
 import java.sql.Connection;
@@ -49,19 +47,6 @@ public class JDBCConnectionFactory {
 			throw new PersistenceException(mensagem, e);
 		}
 	}
-	
-	/*
-	public Connection getConnection() {
-		try {
-			Class.forName("org.postgresql.Driver");
-			return DriverManager.getConnection("jdbc:postgresql://localhost:5432/crud", "psystems", "p5yst3ms@4ppl1ktion");
-		} catch (SQLException e) {
-			throw new RuntimeException(e);
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException(e);
-		}
-	}
-	 * */
 	
 	public static void close(Connection connection) throws PersistenceException {
 		

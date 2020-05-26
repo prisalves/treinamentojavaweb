@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package br.com.psystems.crud.command;
 
 import java.util.List;
@@ -17,9 +15,7 @@ import br.com.psystems.crud.model.domain.Vendor;
 
 public class SearchVendorCommand extends AbstractCommand implements ICommand {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 3699559009520920474L;
 	
 	private static final String SUCCESS = "listvendor.jsp";

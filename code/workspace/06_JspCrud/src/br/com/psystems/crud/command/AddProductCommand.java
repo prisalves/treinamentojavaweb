@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package br.com.psystems.crud.command;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,12 +12,9 @@ import br.com.psystems.crud.model.domain.Product;
 
 public class AddProductCommand extends AbstractCommand implements ICommand {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -9136913987730291078L;
 	
-//	private static final String SUCCESS = "listproduct.jsp";
 	private static final String ERROR = "addproduct.jsp";
 	
 	private ProductDAO productDAO;

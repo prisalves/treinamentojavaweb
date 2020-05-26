@@ -1,14 +1,10 @@
-/**
- * 
- */
+
 package br.com.psystems.crud.exception;
 
 
 public class ConverterException extends Exception {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 4884572782304934693L;
 
 	public ConverterException() {

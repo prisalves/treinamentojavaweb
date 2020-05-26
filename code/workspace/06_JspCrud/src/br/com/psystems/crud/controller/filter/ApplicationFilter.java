@@ -25,7 +25,11 @@ import br.com.psystems.crud.model.domain.Vendor;
  */
 @WebFilter(
 		filterName="mainfilter", 
-		urlPatterns={"/application/vendor/listvendor.jsp", "/application/product/listproduct.jsp", "/application/product/addproduct.jsp"})
+		urlPatterns={
+			"/application/vendor/listvendor.jsp", 
+			"/application/product/listproduct.jsp", 
+			"/application/product/addproduct.jsp"
+		})
 public class ApplicationFilter implements Filter {
 	
 	private static Logger logger = Logger.getLogger(ApplicationFilter.class);
@@ -88,13 +92,6 @@ public class ApplicationFilter implements Filter {
 		// TODO Auto-generated method stub
 	}
 	
-//	protected void printParameters(final HttpServletRequest request) {
-//		Enumeration<String> params = request.getParameterNames();
-//		while (params.hasMoreElements()) {
-//			String paramName = params.nextElement();
-//			String param = request.getParameter(paramName);
-//			System.out.println(paramName+":"+param);
-//		}
-//	}
+
 
 }

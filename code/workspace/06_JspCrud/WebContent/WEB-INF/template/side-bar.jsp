@@ -9,5 +9,5 @@
   <li><a href="${product}addproduct.jsp">Adicionar Produto</a></li>
   <li><a href="${product}listproduct.jsp">Lista de Produtos</a></li>
   <li class="divider"></li>
-  <li><a href="http://foundation.zurb.com/learn/about.html">Sobre o Foundation Framework</a></li>
+  <li><a href="https://www.devmedia.com.br/conhecendo-o-framework-front-end-foundation/27160">Sobre o Foundation Framework</a></li>
 </ul>

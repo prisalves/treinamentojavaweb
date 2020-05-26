@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package br.com.psystems.crud.model.dao;
 
 import java.io.Serializable;
@@ -189,7 +187,6 @@ public class ProductDAO implements IDAO<Product> {
 				
 				ps = con.prepareStatement(OBTER_PRODUTOS_POR_NOME);
 				ps.setString(1, keyword.concat("%"));
-//			ps.closeOnCompletion();
 				
 				rs = ps.executeQuery();
 				
@@ -231,7 +228,6 @@ public class ProductDAO implements IDAO<Product> {
 			con = JDBCConnectionFactory.getConnection();
 			
 			ps = con.prepareStatement(OBTER_TODOS_PRODUTOS);
-//			ps.closeOnCompletion();
 			
 			rs = ps.executeQuery();
 

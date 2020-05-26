@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package br.com.psystems.crud.command;
 
 import java.util.List;
@@ -17,13 +15,10 @@ import br.com.psystems.crud.model.domain.Product;
 
 public class RecoverProductCommand extends AbstractCommand implements ICommand {
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 7606485709102366372L;
 	
 	private static final String SUCCESS = "updateproduct.jsp";
-//	private static final String ERROR = "listproduct.jsp";
 	
 	private ProductDAO productDAO;
 	private VendorDAO vendorDAO;
