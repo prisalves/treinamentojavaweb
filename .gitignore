@@ -70,7 +70,7 @@ local.properties
 ######################
 # Package Files
 ######################
-*.jar
+# *.jar
 *.war
 *.ear
 *.db
@@ -150,7 +150,7 @@ tomcat
 *.dmg
 *.gz
 *.iso
-*.jar
+# *.jar
 *.rar
 *.tar
 *.zip
