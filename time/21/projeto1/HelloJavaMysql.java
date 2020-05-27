@@ -11,13 +11,13 @@ public class HelloJavaMysql {
 			
 			String dbDriver = "com.mysql.cj.jdbc.Driver"; 
             String dbURL = "jdbc:mysql://localhost:3306/"; 
-            String dbName = "cap?useSSL=false"; 
+            String dbName = "cap?useSSL=false&useTimezone=true&serverTimezone=UTC"; 
             String dbUsername = "root"; 
             String dbPassword = ""; 
 			Class.forName(dbDriver);
 			Connection con = DriverManager.getConnection(dbURL + dbName, dbUsername, dbPassword); 
 
-			int cadastro = 1;
+			int cadastro = 0;
 			// Cadastrar
 			if(cadastro == 1) {
 				PreparedStatement pst = con.prepareStatement("INSERT INTO funcionarios (`celular`, `cliente_alocado`, `email`, `funcao`, `nome`, `usuario_github`) VALUES (?,?,?,?,?,?) ");
