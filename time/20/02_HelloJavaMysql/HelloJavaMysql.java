@@ -17,7 +17,7 @@ public class HelloJavaMysql {
 			Class.forName(dbDriver);
 			Connection con = DriverManager.getConnection(dbURL + dbName, dbUsername, dbPassword); 
 
-			int cadastro = 0;
+			int cadastro = 1;
 			// Cadastrar
 			if(cadastro == 1) {
 				PreparedStatement pst = con.prepareStatement("INSERT INTO funcionarios (`celular`, `cliente_alocado`, `email`, `funcao`, `nome`, `usuario_github`) VALUES (?,?,?,?,?,?) ");
