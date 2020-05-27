@@ -13,7 +13,7 @@ public class HelloJavaMysql {
             String dbURL = "jdbc:mysql://localhost:3306/"; 
             String dbName = "cap?useSSL=false"; 
             String dbUsername = "root"; 
-            String dbPassword = ""; 
+            String dbPassword = "1234"; 
 			Class.forName(dbDriver);
 			Connection con = DriverManager.getConnection(dbURL + dbName, dbUsername, dbPassword); 
 
