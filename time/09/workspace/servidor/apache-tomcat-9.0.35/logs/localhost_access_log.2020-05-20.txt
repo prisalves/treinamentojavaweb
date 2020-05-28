@@ -1,9 +1,0 @@
-127.0.0.1 - - [20/May/2020:12:04:35 -0300] "GET / HTTP/1.1" 200 11415
-0:0:0:0:0:0:0:1 - - [20/May/2020:12:04:36 -0300] "GET /springboot2-jpa-crud-example/ HTTP/1.1" 404 796
-0:0:0:0:0:0:0:1 - - [20/May/2020:12:04:41 -0300] "GET /springboot-crud-rest/api/v1/employees HTTP/1.1" 404 812
-0:0:0:0:0:0:0:1 - - [20/May/2020:12:04:45 -0300] "POST /springboot-crud-rest/api/v1/employees HTTP/1.1" 404 812
-0:0:0:0:0:0:0:1 - - [20/May/2020:12:04:45 -0300] "GET /springboot-crud-rest/api/v1/employees HTTP/1.1" 404 812
-127.0.0.1 - - [20/May/2020:12:11:27 -0300] "GET / HTTP/1.1" 200 11415
-0:0:0:0:0:0:0:1 - - [20/May/2020:12:11:27 -0300] "GET /springboot2-jpa-crud-example/ HTTP/1.1" 404 796
-0:0:0:0:0:0:0:1 - - [20/May/2020:12:11:33 -0300] "GET /springboot-crud-rest/api/v1/employees HTTP/1.1" 404 812
-0:0:0:0:0:0:0:1 - - [20/May/2020:12:11:35 -0300] "GET /springboot-crud-rest/api/v1/employees HTTP/1.1" 404 812
