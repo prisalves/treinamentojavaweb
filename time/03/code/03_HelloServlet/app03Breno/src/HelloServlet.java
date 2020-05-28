@@ -13,7 +13,7 @@ public class HelloServlet extends HttpServlet {
 		res.setContentType("text/html");
 		PrintWriter writer = res.getWriter();
 		writer.println("<html><head><title>Hello Servlet</title></head>");
-		writer.println("<body><h1>Hello Servlet</h1>");
+		writer.println("<body><h1>Hello Servlet - Breno</h1>");
 		writer.println("</body></html>");
 	}
 }
