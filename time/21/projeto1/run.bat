@@ -2,10 +2,7 @@
 SET _JAVA_OPTIONS=
 REM ---- COMPILAR 
 echo compilando ...
-
-javac HelloJava.java
-
+javac HelloJavaMysql.java
 REM ---- RODAR java através da JVM Java Virtual Machine
 echo executando aplicacao ...
-
-java HelloJava %1
+java -cp .;mysql-connector-java-8.0.19.jar HelloJavaMysql

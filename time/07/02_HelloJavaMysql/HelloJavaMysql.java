@@ -11,9 +11,9 @@ public class HelloJavaMysql {
 			
 			String dbDriver = "com.mysql.cj.jdbc.Driver"; 
             String dbURL = "jdbc:mysql://localhost:3306/"; 
-            String dbName = "cap?useSSL=false"; 
+            String dbName = "JavaWeb?useSSL=false"; 
             String dbUsername = "root"; 
-            String dbPassword = ""; 
+            String dbPassword = "root"; 
 			Class.forName(dbDriver);
 			Connection con = DriverManager.getConnection(dbURL + dbName, dbUsername, dbPassword); 
 
@@ -21,7 +21,7 @@ public class HelloJavaMysql {
 			// Cadastrar
 			if(cadastro == 1) {
 				PreparedStatement pst = con.prepareStatement("INSERT INTO funcionarios (`celular`, `cliente_alocado`, `email`, `funcao`, `nome`, `usuario_github`) VALUES (?,?,?,?,?,?) ");
-				pst.setString(1, "1198888885"); // Celular
+				pst.setString(1, "1198876885"); // Celular
 				pst.setString(2, "Cliente Alocado"); // Cliente Alocado
 				pst.setString(3, "Email"); // Email
 				pst.setString(4, "Funcao"); // Função dentro da CAP
