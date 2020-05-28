@@ -13,16 +13,16 @@ public class HelloJavaMysql {
             String dbURL = "jdbc:mysql://localhost:3306/"; 
             String dbName = "cap?useSSL=false"; 
             String dbUsername = "root"; 
-            String dbPassword = ""; 
+            String dbPassword = "le032122"; 
 			Class.forName(dbDriver);
 			Connection con = DriverManager.getConnection(dbURL + dbName, dbUsername, dbPassword); 
 
 			int cadastro = 0;
 			// Cadastrar
-			if(cadastro == 1) {
+			if(cadastro == 0) {
 				PreparedStatement pst = con.prepareStatement("INSERT INTO funcionarios (`celular`, `cliente_alocado`, `email`, `funcao`, `nome`, `usuario_github`) VALUES (?,?,?,?,?,?) ");
-				pst.setString(1, "1198888885"); // Celular
-				pst.setString(2, "Cliente Alocado"); // Cliente Alocado
+				pst.setString(1, "1198888888"); // Celular
+				pst.setString(2, "Cliente Alocado - eu"); // Cliente Alocado
 				pst.setString(3, "Email"); // Email
 				pst.setString(4, "Funcao"); // Função dentro da CAP
 				pst.setString(5, "Nome"); // Nome Completo
