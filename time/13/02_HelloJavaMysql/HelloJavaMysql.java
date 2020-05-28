@@ -11,9 +11,9 @@ public class HelloJavaMysql {
 			
 			String dbDriver = "com.mysql.cj.jdbc.Driver"; 
             String dbURL = "jdbc:mysql://localhost:3306/"; 
-            String dbName = "cap?useSSL=false"; 
+            String dbName = "trei_cap?useSSL=false&useTimezone=true&serverTimezone=UTC"; 
             String dbUsername = "root"; 
-            String dbPassword = ""; 
+            String dbPassword = "root"; 
 			Class.forName(dbDriver);
 			Connection con = DriverManager.getConnection(dbURL + dbName, dbUsername, dbPassword); 
 
@@ -21,12 +21,12 @@ public class HelloJavaMysql {
 			// Cadastrar
 			if(cadastro == 1) {
 				PreparedStatement pst = con.prepareStatement("INSERT INTO funcionarios (`celular`, `cliente_alocado`, `email`, `funcao`, `nome`, `usuario_github`) VALUES (?,?,?,?,?,?) ");
-				pst.setString(1, "1198888885"); // Celular
-				pst.setString(2, "Cliente Alocado"); // Cliente Alocado
-				pst.setString(3, "Email"); // Email
-				pst.setString(4, "Funcao"); // Função dentro da CAP
-				pst.setString(5, "Nome"); // Nome Completo
-				pst.setString(6, "Usuario GitHub"); // Usuario do Github
+				pst.setString(1, "11984755657"); // Celular
+				pst.setString(2, "Bradesco"); // Cliente Alocado
+				pst.setString(3, "maicon.barbieri@capgemini.com"); // Email
+				pst.setString(4, "An. Sistemas"); // Função dentro da CAP
+				pst.setString(5, "Maicon Barbieri"); // Nome Completo
+				pst.setString(6, "maiconbarbieri"); // Usuario do Github
 				pst.executeUpdate();
 				pst.close();
 			}
