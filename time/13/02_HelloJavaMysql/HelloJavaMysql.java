@@ -10,10 +10,11 @@ public class HelloJavaMysql {
         try {
 			
 			String dbDriver = "com.mysql.cj.jdbc.Driver"; 
-            String dbURL = "jdbc:mysql://localhost:3306/"; 
-            String dbName = "trei_cap?useSSL=false&useTimezone=true&serverTimezone=UTC"; 
+            //String dbURL = "jdbc:mysql://localhost:3306/"; 
+            String dbURL = "jdbc:mysql://191.252.0.230:3306/"; 
+            String dbName = "cap?useSSL=false&useTimezone=true&serverTimezone=UTC"; 
             String dbUsername = "root"; 
-            String dbPassword = "root"; 
+            String dbPassword = "admin"; 
 			Class.forName(dbDriver);
 			Connection con = DriverManager.getConnection(dbURL + dbName, dbUsername, dbPassword); 
 
