@@ -8,4 +8,4 @@ javac HelloJavaMysql.java
 REM ---- RODAR java através da JVM Java Virtual Machine
 echo executando aplicacao ...
 
-java -classpath .;mysql-connector-java-8.0.19.jar HelloJavaMysql
+java -cp .;mysql-connector-java-8.0.19.jar HelloJavaMysql

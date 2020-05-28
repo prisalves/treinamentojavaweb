@@ -16,3 +16,5 @@ setx JAVA_HOME "C:\Program Files\Java\jdk1.8.0_221" /m
 4 - importar arquivo.. funcionario.sql
 6 - configurar arquivo.java
 5 - rodar hellomysql
+
+1 - Mu
