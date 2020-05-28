@@ -5,13 +5,12 @@ echo -----------------------
 set app=13-app01
 echo compilando %app% ...
 
-REM setx CATALINA_HOME "C:\apache-tomcat-9.0.35" /m 
-
 javac -classpath "C:\apache-tomcat-9.0.35\lib\servlet-api.jar" %app%\src\HelloServlet.java
 
 echo criando estrutura de pasta ...
+mkdir %app%\WEB-INF\classes
 copy %app%\src\HelloServlet.class %app%\WEB-INF\classes
-REM del %app%\src\HelloServlet.class
+del %app%\src\HelloServlet.class
 
 echo gerando arquivo war ...
 cmd /c "cd %app% & jar cf ..\%app%.war *"
