@@ -208,3 +208,7 @@ pom.xml.tag
 # Maven
 log/
 target/
+
+apache-tomcat-9.0.35/
+wildfly-10.1.0.Final/
+servidor/
